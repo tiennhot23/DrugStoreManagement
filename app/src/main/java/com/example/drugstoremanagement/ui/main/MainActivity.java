@@ -6,8 +6,9 @@ import android.os.Bundle;
 import com.example.drugstoremanagement.R;
 import com.example.drugstoremanagement.data.DataManager;
 import com.example.drugstoremanagement.data.db.model.HistorySearch;
+import com.example.drugstoremanagement.ui.base.BaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     TextView textView ;
 
@@ -16,12 +17,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setup();
+
+    }
+
+    @Override
+    protected void setup() {
         textView = findViewById(R.id.txt);
-
-        DataManager.getInstance(this).insertHistorySearch(new HistorySearch("thuoc"));
-
-        DataManager.getInstance(this).getHistorySearch().observe(this, historySearches -> {
-            if (historySearches != null && historySearches.size() > 0)textView.setText(historySearches.get(0).search);
+        textView.setOnClickListener(v -> {
+            showLoading();
         });
     }
 }

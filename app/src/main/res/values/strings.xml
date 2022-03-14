@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DrugStoreManagement</string>
+
+
+
+    <string name="something_wrong">Có lỗi xảy ra</string>
+
+
 </resources>
