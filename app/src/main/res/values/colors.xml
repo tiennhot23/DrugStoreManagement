@@ -8,6 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-
+    <color name="primary">#FFF2F2</color>
+    <color name="dark_primary">#F0D2D2</color>
+    <color name="text">#000</color>
+    <color name="icon">#fff</color>
+    
     <color name="black_effective">#2a2a2a</color>
 </resources>
