@@ -11,6 +11,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.drugstore.DrugStoreActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.bill.BillActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

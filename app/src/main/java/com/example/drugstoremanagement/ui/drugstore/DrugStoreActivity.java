@@ -42,6 +42,7 @@ public class DrugStoreActivity extends BaseActivity implements View.OnClickListe
         dialogDrugStore.setContentView(R.layout.drug_store_dialog);
         dialogDrugStore.getWindow().setBackgroundDrawableResource(R.color.transparent);
         dialogDrugStore.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialogDrugStore.getWindow().getAttributes().windowAnimations = R.style.FadeAnimation;
         dialogDrugStore.setCancelable(false);
         dialogDrugStore.setCanceledOnTouchOutside(false);
 
