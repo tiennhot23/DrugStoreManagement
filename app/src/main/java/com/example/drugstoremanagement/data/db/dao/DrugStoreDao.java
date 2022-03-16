@@ -10,20 +10,20 @@ import java.util.List;
 @Dao
 public interface DrugStoreDao {
     @Query("SELECT * FROM DRUGSTORE")
-    LiveData<List<DrugStore>> getAll();
+    List<DrugStore> getAll();
 
     @Query("SELECT * FROM DRUGSTORE WHERE drugStoreName LIKE :search LIMIT 1")
     List<DrugStore> findDrugStores(String search);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertAll(DrugStore... drugStores);
+    long[] insertAll(DrugStore... drugStores);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(DrugStore drugStore);
+    long insert(DrugStore drugStore);
 
     @Delete
-    void delete(DrugStore drugStore);
+    int delete(DrugStore drugStore);
 
     @Update
-    void update(DrugStore drugStore);
+    int update(DrugStore drugStore);
 }

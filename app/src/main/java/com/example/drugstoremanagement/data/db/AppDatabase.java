@@ -4,6 +4,7 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import com.example.drugstoremanagement.data.db.dao.DrugStoreDao;
 import com.example.drugstoremanagement.data.db.dao.HistorySearchDao;
 import com.example.drugstoremanagement.data.db.model.*;
 
@@ -14,6 +15,8 @@ import java.util.concurrent.Executors;
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract HistorySearchDao historySearchDao();
+
+    public abstract DrugStoreDao drugStoreDao();
 
     private static volatile AppDatabase instance;
 

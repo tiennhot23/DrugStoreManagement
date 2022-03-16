@@ -10,4 +10,11 @@
     <string name="save">Lưu</string>
 
 
+    <!-- operation -->
+    <string name="save_success">Lưu thành công</string>
+    <string name="save_fail">Lưu thất bại</string>
+
+    <!-- validate -->
+    <string name="empty_drugstore_name">Tên nhà thuốc không được bỏ trống</string>
+    <string name="empty_address">Địa chỉ không được bỏ trống</string>
 </resources>

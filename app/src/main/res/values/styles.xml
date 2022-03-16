@@ -12,7 +12,11 @@
         <item name="android:textColor">@color/light_text</item>
     </style>
 
-    <style name="FadeAnimation">
+    <style name="ZoomAnimation">
+        <item name="android:windowEnterAnimation">@anim/anim_dialog_show</item>
+        <item name="android:windowExitAnimation">@anim/anim_dialog_dismiss</item>
+    </style>
+    <style name="ActivityAnimation">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>

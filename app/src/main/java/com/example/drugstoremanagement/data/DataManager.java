@@ -3,6 +3,7 @@ package com.example.drugstoremanagement.data;
 import android.content.Context;
 import androidx.lifecycle.LiveData;
 import com.example.drugstoremanagement.data.db.DBHelper;
+import com.example.drugstoremanagement.data.db.model.DrugStore;
 import com.example.drugstoremanagement.data.db.model.HistorySearch;
 
 import java.util.List;
@@ -34,5 +35,14 @@ public class DataManager {
         dbHelper.deleteHistorySearch(historySearch);
     }
 
+    public List<DrugStore> getDrugStore() {return dbHelper.getDrugStore();}
+
+    public boolean insertDrugStore(DrugStore drugStore) {
+        return dbHelper.insertDrugStore(drugStore) >= 0 ;
+    }
+
+    public boolean updateDrugStore(DrugStore drugStore) {
+        return dbHelper.updateDrugStore(drugStore) >= 0;
+    }
 
 }
