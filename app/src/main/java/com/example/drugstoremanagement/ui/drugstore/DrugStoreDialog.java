@@ -107,7 +107,7 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
                 }
                 break;
             case R.id.btn_cancel:
-                if (drugStore != null && drugStore.drugStoreID.equals("")) {
+                if (drugStore.drugStoreID != null && drugStore.drugStoreID.equals("")) {
                     callback.fail();
                 }
                 dismiss();

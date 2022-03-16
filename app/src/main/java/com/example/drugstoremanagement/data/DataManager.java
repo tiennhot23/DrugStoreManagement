@@ -37,6 +37,8 @@ public class DataManager {
 
     public List<DrugStore> getDrugStore() {return dbHelper.getDrugStore();}
 
+    public List<DrugStore> findDrugStore(String query) {return dbHelper.findDrugStore(query);}
+
     public boolean insertDrugStore(DrugStore drugStore) {
         return dbHelper.insertDrugStore(drugStore) >= 0 ;
     }

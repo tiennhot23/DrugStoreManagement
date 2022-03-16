@@ -12,7 +12,7 @@ public interface DrugStoreDao {
     @Query("SELECT * FROM DRUGSTORE")
     List<DrugStore> getAll();
 
-    @Query("SELECT * FROM DRUGSTORE WHERE drugStoreName LIKE :search LIMIT 1")
+    @Query("SELECT * FROM DRUGSTORE WHERE drugStoreName LIKE '%' || :search || '%'")
     List<DrugStore> findDrugStores(String search);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

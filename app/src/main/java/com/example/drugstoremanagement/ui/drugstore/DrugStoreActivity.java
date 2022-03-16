@@ -40,10 +40,6 @@ public class DrugStoreActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void setup() {
         setupView();
-        edtSearch.setOnKeyListener((view, i, keyEvent) -> {
-            search(edtSearch.getText().toString().trim());
-            return true;
-        });
         btnAdd.setOnClickListener(this);
         btnBack.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
@@ -61,8 +57,11 @@ public class DrugStoreActivity extends BaseActivity implements View.OnClickListe
         btnSearch = findViewById(R.id.btn_search);
     }
 
-    private void search(String text) {
-
+    @SuppressLint("NotifyDataSetChanged")
+    private void search(String query) {
+        drugStores.clear();
+        drugStores.addAll(DataManager.getInstance(this).findDrugStore(query));
+        if (recycler.getAdapter() != null) recycler.getAdapter().notifyDataSetChanged();
     }
 
     @SuppressLint("NonConstantResourceId")

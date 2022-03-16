@@ -54,6 +54,17 @@ public class DBHelper {
         }
     }
 
+    public List<DrugStore> findDrugStore(String query) {
+        Future<List<DrugStore>> future = executor.submit(() -> drugStoreDao.findDrugStores(query));
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            Log.e("FIND_DRUGSTORE", e.getMessage());
+            return null;
+        }
+    }
+
     public long insertDrugStore(DrugStore drugStore) {
         Future<Long> future = executor.submit(() -> {
             return drugStoreDao.insert(drugStore);
