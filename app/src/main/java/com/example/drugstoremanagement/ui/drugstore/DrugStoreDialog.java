@@ -23,15 +23,22 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
 
     private DrugStore drugStore;
     private Context context;
+    private Callback callback;
 
     private EditText edtDrugStoreName, edtAddress;
     private Button btnSave;
     private ImageView btnCancel;
 
-    public DrugStoreDialog(@NonNull Context context, DrugStore drugStore) {
+    interface Callback {
+        void success();
+        void fail();
+    }
+
+    public DrugStoreDialog(@NonNull Context context, Callback callback, DrugStore drugStore) {
         super(context);
         this.context = context;
         this.drugStore = drugStore;
+        this.callback = callback;
     }
 
     @Override
@@ -78,15 +85,31 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
                     drugStore.drugStoreName = edtDrugStoreName.getText().toString().trim();
                     drugStore.address = edtAddress.getText().toString().trim();
                     if (DataManager.getInstance(context).insertDrugStore(drugStore)) {
-                        showMessage(R.string.save_success);
+                        callback.success();
                     } else {
-                        showMessage(R.string.save_fail);
+                        callback.fail();
+                    }
+                    dismiss();
+                } else {
+                    if (edtDrugStoreName.getText().toString().trim().equals("")) {
+                        onError(R.string.empty_drugstore_name);
+                        return;
+                    } if (edtAddress.getText().toString().trim().equals("")) {
+                        onError(R.string.empty_address);
+                        return;
+                    }
+                    drugStore.drugStoreName = edtDrugStoreName.getText().toString().trim();
+                    drugStore.address = edtAddress.getText().toString().trim();
+                    if (DataManager.getInstance(context).updateDrugStore(drugStore)) {
+                        callback.success();
                     }
                     dismiss();
                 }
                 break;
             case R.id.btn_cancel:
-                drugStore = null;
+                if (drugStore != null && drugStore.drugStoreID.equals("")) {
+                    callback.fail();
+                }
                 dismiss();
                 break;
             default:

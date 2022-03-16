@@ -26,17 +26,20 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"
-                android:layout_marginHorizontal="5dp"
-                android:src="@drawable/ic_back_dark"/>
+                android:layout_marginHorizontal="10dp"
+                android:src="@drawable/ic_back_dark" />
 
             <EditText
                 android:id="@+id/edt_search"
+                style="@style/MyEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_toStartOf="@id/btn_search"
-                android:layout_toEndOf="@+id/btn_back"
-                style="@style/MyEditText"/>
+                android:layout_toEndOf="@+id/btn_back" />
 
             <ImageView
                 android:id="@+id/btn_search"
@@ -44,8 +47,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:layout_marginHorizontal="5dp"
-                android:src="@drawable/ic_search_dark"/>
+                android:layout_marginHorizontal="10dp"
+                android:src="@drawable/ic_search_dark" />
 
         </RelativeLayout>
 
@@ -76,14 +79,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_margin="10dp"
-            app:cardCornerRadius="20dp">
+            app:cardCornerRadius="22dp">
             <ImageView
                 android:id="@+id/btn_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:layout_margin="5dp"
+                android:layout_margin="10dp"
                 android:src="@drawable/ic_add"/>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
@@ -91,6 +94,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:layout_margin="15dp"/>
 
 </LinearLayout>
