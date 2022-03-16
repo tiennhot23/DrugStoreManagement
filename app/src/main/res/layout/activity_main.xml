@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="thuoc"/>
     <Button
+        android:id="@+id/btn_drug_store"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="nhathuoc"/>

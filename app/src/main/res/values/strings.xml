@@ -2,8 +2,12 @@
     <string name="app_name">DrugStoreManagement</string>
 
 
-
     <string name="something_wrong">Có lỗi xảy ra</string>
+    <string name="drugstore">Nhà thuốc</string>
+    <string name="address">Địa chỉ</string>
+    <string name="drugstore_">Nhà thuốc:</string>
+    <string name="address_">Địa chỉ: </string>
+    <string name="save">Lưu</string>
 
 
 </resources>

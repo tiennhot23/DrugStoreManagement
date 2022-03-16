@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <style name="MyEditText" parent="Widget.AppCompat.EditText">
+        <item name="backgroundTint">@color/dark_icon</item>
+        <item name="singleLine">true</item>
+        <item name="android:textColor">@color/dark_text</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_edittext</item>
+    </style>
+
+    <style name="MyButton" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/light_text</item>
+    </style>
+
+    <style name="FadeAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+</resources>

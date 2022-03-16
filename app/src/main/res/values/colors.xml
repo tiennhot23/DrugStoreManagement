@@ -8,10 +8,17 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primary">#FFF2F2</color>
-    <color name="dark_primary">#F0D2D2</color>
-    <color name="text">#000</color>
-    <color name="icon">#fff</color>
-    
+    <color name="primary">#417E80</color>
+    <color name="dark_primary">#417E80</color>
+    <color name="light_primary">#8DB2B4</color>
+    <color name="background">#fff</color>
+    <color name="dark_text">#000</color>
+    <color name="light_text">#fff</color>
+    <color name="dark_card">#417E80</color>
+    <color name="light_card">#EEEEEE</color>
+    <color name="light_icon">#fff</color>
+    <color name="dark_icon">#417E80</color>
+    <color name="transparent">#0000FFFF</color>
+
     <color name="black_effective">#2a2a2a</color>
 </resources>

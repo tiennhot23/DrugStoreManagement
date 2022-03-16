@@ -3,8 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/MyPC/Desktop/DrugStoreManagement/app/src/main/res/drawable/angle-left_24.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/MyPC/Desktop/DrugStoreManagement/app/src/main/res/drawable/cursor_edittext.xml" value="0.23072916666666668" />
+        <entry key="..\:/Users/MyPC/Desktop/DrugStoreManagement/app/src/main/res/drawable/dialog_background.xml" value="0.23072916666666668" />
+        <entry key="..\:/Users/MyPC/Desktop/DrugStoreManagement/app/src/main/res/drawable/ic_add.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/MyPC/Desktop/DrugStoreManagement/app/src/main/res/drawable/ic_back.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/MyPC/Desktop/DrugStoreManagement/app/src/main/res/drawable/ic_search.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/MyPC/Desktop/DrugStoreManagement/app/src/main/res/layout/activity_drug_store.xml" value="0.25" />
         <entry key="..\:/Users/MyPC/Desktop/DrugStoreManagement/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/MyPC/Desktop/DrugStoreManagement/app/src/main/res/layout/drug_store_dialog.xml" value="0.215625" />
         <entry key="..\:/Users/MyPC/Desktop/DrugStoreManagement/app/src/main/res/layout/progress_dialog.xml" value="0.1390625" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/drawable/button_background.xml" value="0.30833333333333335" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/drawable/cursor_edittext.xml" value="0.309375" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/drawable/dialog_background.xml" value="0.309375" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/drawable/ic_add.xml" value="0.309375" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/drawable/ic_back.xml" value="0.309375" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/drawable/ic_back_dark.xml" value="0.309375" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/drawable/ic_search.xml" value="0.309375" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/drawable/ic_search_dark.xml" value="0.309375" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/activity_drug_store.xml" value="0.29322916666666665" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/activity_main.xml" value="0.29322916666666665" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/drug_store_dialog.xml" value="0.29322916666666665" />
       </map>
     </option>
   </component>

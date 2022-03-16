@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/dialog_background"
+        android:padding="20dp"
+        android:layout_margin="40dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_drugstore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/edt_drugstore_name"
+                android:layout_alignBottom="@+id/edt_drugstore_name"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/drugstore_"
+                android:textColor="@color/dark_text"
+                android:textSize="@dimen/text_normal"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edt_drugstore_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/txt_drugstore"
+                android:textSize="@dimen/text_normal"
+                style="@style/MyEditText"/>
+
+            <TextView
+                android:id="@+id/txt_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_drugstore"
+                android:layout_alignTop="@+id/edt_address"
+                android:layout_alignEnd="@+id/txt_drugstore"
+                android:layout_alignBottom="@+id/edt_address"
+                android:layout_marginEnd="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/address_"
+                android:textColor="@color/dark_text"
+                android:textSize="@dimen/text_normal"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/edt_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_normal"
+                android:layout_below="@id/edt_drugstore_name"
+                android:layout_alignStart="@id/edt_drugstore_name"
+                style="@style/MyEditText"/>
+
+        </RelativeLayout>
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="30dp"
+            android:text="@string/save"
+            android:textSize="@dimen/text_normal"
+            style="@style/MyButton"
+            android:background="@drawable/button_background" />
+    </LinearLayout>
+</LinearLayout>
