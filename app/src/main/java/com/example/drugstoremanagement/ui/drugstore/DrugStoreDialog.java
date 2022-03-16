@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -25,6 +26,7 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
 
     private EditText edtDrugStoreName, edtAddress;
     private Button btnSave;
+    private ImageView btnCancel;
 
     public DrugStoreDialog(@NonNull Context context, DrugStore drugStore) {
         super(context);
@@ -40,10 +42,12 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
         edtDrugStoreName = findViewById(R.id.edt_drugstore_name);
         edtAddress = findViewById(R.id.edt_address);
         btnSave = findViewById(R.id.btn_save);
+        btnCancel = findViewById(R.id.btn_cancel);
 
         edtDrugStoreName.setText(drugStore.drugStoreName);
         edtAddress.setText(drugStore.address);
         btnSave.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
     }
 
     @Override
@@ -57,27 +61,36 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btn_save) {
-            if (drugStore.drugStoreID == null || drugStore.drugStoreID.equals("")) {
-                if (edtDrugStoreName.getText().toString().trim().equals("")) {
-                    onError(R.string.empty_drugstore_name);
-                    return;
-                } if (edtAddress.getText().toString().trim().equals("")) {
-                    onError(R.string.empty_address);
-                    return;
+        switch (view.getId()){
+            case R.id.btn_save:
+                if (drugStore.drugStoreID == null || drugStore.drugStoreID.equals("")) {
+                    if (edtDrugStoreName.getText().toString().trim().equals("")) {
+                        onError(R.string.empty_drugstore_name);
+                        return;
+                    } if (edtAddress.getText().toString().trim().equals("")) {
+                        onError(R.string.empty_address);
+                        return;
+                    }
+                    drugStore.drugStoreID = generateDrugStoreID();
+                    drugStore.drugStoreName = edtDrugStoreName.getText().toString().trim();
+                    drugStore.address = edtAddress.getText().toString().trim();
+                    if (DataManager.getInstance(context).insertDrugStore(drugStore)) {
+                        showMessage(R.string.save_success);
+                    } else {
+                        showMessage(R.string.save_fail);
+                    }
+                    dismiss();
                 }
-                drugStore.drugStoreID = generateDrugStoreID();
-                drugStore.drugStoreName = edtDrugStoreName.getText().toString().trim();
-                drugStore.address = edtAddress.getText().toString().trim();
-                if (DataManager.getInstance(context).insertDrugStore(drugStore)) {
-                    showMessage(R.string.save_success);
-                } else {
-                    showMessage(R.string.save_fail);
-                }
+                break;
+            case R.id.btn_cancel:
+                drugStore = null;
                 dismiss();
-            }
+                break;
+            default:
+                break;
         }
     }
 
