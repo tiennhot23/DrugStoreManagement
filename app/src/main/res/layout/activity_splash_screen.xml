@@ -24,10 +24,10 @@
             android:text="Save Time And Energy"
             android:textSize="@dimen/text_large"
             android:textStyle="bold"
+            android:textColor="@color/dark_text"
             android:layout_gravity="center"
             android:gravity="center"
-            tools:ignore="HardcodedText"
-            android:inAnimation="@anim/slide_from_left"/>
+            tools:ignore="HardcodedText"/>
         <TextView
             android:id="@+id/txt2"
             android:layout_width="wrap_content"
@@ -35,6 +35,7 @@
             android:text="Manage drugstores with few click"
             android:textSize="@dimen/text_normal"
             android:layout_gravity="center"
+            android:textColor="@color/dark_text"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
