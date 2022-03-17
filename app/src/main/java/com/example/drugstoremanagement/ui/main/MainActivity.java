@@ -3,6 +3,7 @@ package com.example.drugstoremanagement.ui.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import androidx.cardview.widget.CardView;
 import com.example.drugstoremanagement.R;
@@ -29,6 +30,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         cardDrugStore.setOnClickListener(this);
         cardBill.setOnClickListener(this);
         cardStatistic.setOnClickListener(this);
+
+        cardDrug.setVisibility(View.VISIBLE);
+        cardDrug.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom));
+        cardDrug.postDelayed(() -> {
+            cardDrugStore.setVisibility(View.VISIBLE);
+            cardDrugStore.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom));
+            cardDrugStore.postDelayed(() -> {
+                cardBill.setVisibility(View.VISIBLE);
+                cardBill.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom));
+                cardBill.postDelayed(() -> {
+                    cardStatistic.setVisibility(View.VISIBLE);
+                    cardStatistic.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom));
+                },200);
+            },200);
+        },200);
     }
 
     private void setupView() {
