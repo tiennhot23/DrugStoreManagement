@@ -1,5 +1,6 @@
 package com.example.drugstoremanagement.ui.splashscreen;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+@SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
 
     ImageView imgSplash;
