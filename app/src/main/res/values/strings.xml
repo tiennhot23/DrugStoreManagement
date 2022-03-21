@@ -19,4 +19,5 @@
     <string name="empty_address">Địa chỉ không được bỏ trống</string>
     <string name="amount_">Số lượng:</string>
     <string name="unit_">Đơn vị tính:</string>
+    <string name="statistic">Thống kê</string>
 </resources>
