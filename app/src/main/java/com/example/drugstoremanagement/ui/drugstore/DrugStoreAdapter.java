@@ -35,8 +35,8 @@ public class DrugStoreAdapter extends RecyclerView.Adapter<DrugStoreAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtDrugStoreName.setText(drugStores.get(position).drugStoreName);
-        holder.txtAddress.setText(drugStores.get(position).address);
+        holder.txtDrugStoreName.setText(drugStores.get(position).getDrugStoreName());
+        holder.txtAddress.setText(drugStores.get(position).getAddress());
     }
 
     @Override

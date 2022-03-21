@@ -58,7 +58,7 @@ public class StatisticActivity extends BaseActivity implements View.OnClickListe
     private void setupView() {
         spinnerDrugStore = findViewById(R.id.spinner);
         btnBack = findViewById(R.id.btn_back);
-        expandableListView =
+        expandableListView = findViewById(R.id.list_item);
     }
 
     @Override

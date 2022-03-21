@@ -35,7 +35,7 @@ public class DrugStoreNameAdapter extends ArrayAdapter<String> {
 
     @Override
     public String getItem(int i) {
-        return drugStores.get(i).drugStoreName;
+        return drugStores.get(i).getDrugStoreName();
     }
 
     @SuppressLint("ViewHolder")
@@ -43,7 +43,7 @@ public class DrugStoreNameAdapter extends ArrayAdapter<String> {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View row = LayoutInflater.from(context).inflate(resource, viewGroup, false);
         TextView txtDrugStoreName = row.findViewById(R.id.txt_drugstore_name);
-        txtDrugStoreName.setText(drugStores.get(i).drugStoreName);
+        txtDrugStoreName.setText(drugStores.get(i).getDrugStoreName());
         return row;
     }
 }

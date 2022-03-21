@@ -17,4 +17,36 @@ public class Bill {
 
     public Bill(){
     }
+
+    public String getBillID() {
+        return billID;
+    }
+
+    public void setBillID(String billID) {
+        this.billID = billID;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDrugStoreID() {
+        return drugStoreID;
+    }
+
+    public void setDrugStoreID(String drugStoreID) {
+        this.drugStoreID = drugStoreID;
+    }
+
+    public List<Drug> getDrugs() {
+        return drugs;
+    }
+
+    public void setDrugs(List<Drug> drugs) {
+        this.drugs = drugs;
+    }
 }

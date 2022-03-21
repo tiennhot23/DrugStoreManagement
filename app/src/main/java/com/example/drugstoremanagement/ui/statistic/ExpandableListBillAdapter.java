@@ -73,9 +73,9 @@ public class ExpandableListBillAdapter extends BaseExpandableListAdapter {
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
         view = LayoutInflater.from(context).inflate(R.layout.child_item, null);
         TextView txtBillId = view.findViewById(R.id.txt_bill_id);
-        txtBillId.setText(data.get(dates.get(i)).get(i1).billID);
+        txtBillId.setText(data.get(dates.get(i)).get(i1).getBillID());
         TextView txtMoney = view.findViewById(R.id.txt_money);
-        txtMoney.setText(data.get(dates.get(i)).get(i1).);
+        txtMoney.setText(data.get(dates.get(i)).get(i1).getDate());
         return view;
     }
 

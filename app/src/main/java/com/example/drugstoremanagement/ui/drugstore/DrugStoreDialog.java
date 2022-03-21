@@ -51,8 +51,8 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
         btnSave = findViewById(R.id.btn_save);
         btnCancel = findViewById(R.id.btn_cancel);
 
-        edtDrugStoreName.setText(drugStore.drugStoreName);
-        edtAddress.setText(drugStore.address);
+        edtDrugStoreName.setText(drugStore.getDrugStoreName());
+        edtAddress.setText(drugStore.getAddress());
         btnSave.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
     }
@@ -73,7 +73,7 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_save:
-                if (drugStore.drugStoreID == null || drugStore.drugStoreID.equals("")) {
+                if (drugStore.getDrugStoreID() == null || drugStore.getDrugStoreID().equals("")) {
                     if (edtDrugStoreName.getText().toString().trim().equals("")) {
                         onError(R.string.empty_drugstore_name);
                         return;
@@ -81,9 +81,9 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
                         onError(R.string.empty_address);
                         return;
                     }
-                    drugStore.drugStoreID = generateDrugStoreID();
-                    drugStore.drugStoreName = edtDrugStoreName.getText().toString().trim();
-                    drugStore.address = edtAddress.getText().toString().trim();
+                    drugStore.setDrugStoreID(generateDrugStoreID());
+                    drugStore.setDrugStoreName(edtDrugStoreName.getText().toString().trim());
+                    drugStore.setAddress(edtAddress.getText().toString().trim());
                     if (DataManager.getInstance(context).insertDrugStore(drugStore)) {
                         callback.success();
                     } else {
@@ -98,8 +98,8 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
                         onError(R.string.empty_address);
                         return;
                     }
-                    drugStore.drugStoreName = edtDrugStoreName.getText().toString().trim();
-                    drugStore.address = edtAddress.getText().toString().trim();
+                    drugStore.setDrugStoreName(edtDrugStoreName.getText().toString().trim());
+                    drugStore.setAddress(edtAddress.getText().toString().trim());
                     if (DataManager.getInstance(context).updateDrugStore(drugStore)) {
                         callback.success();
                     }
@@ -107,7 +107,7 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
                 }
                 break;
             case R.id.btn_cancel:
-                if (drugStore.drugStoreID != null && drugStore.drugStoreID.equals("")) {
+                if (drugStore.getDrugStoreID() != null && drugStore.getDrugStoreID().equals("")) {
                     callback.fail();
                 }
                 dismiss();
