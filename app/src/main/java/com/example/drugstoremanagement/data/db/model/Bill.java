@@ -7,8 +7,9 @@ public class Bill {
     private String date;
     private String drugStoreID;
     private List<Drug> drugs;
+    private long total;
 
-    public Bill(String billID, String date, String drugStoreID, String total, List<Drug> drugs) {
+    public Bill(String billID, String date, String drugStoreID, List<Drug> drugs) {
         this.billID = billID;
         this.date = date;
         this.drugStoreID = drugStoreID;
@@ -16,6 +17,12 @@ public class Bill {
     }
 
     public Bill(){
+    }
+
+    public Bill(String billID, String date, long total){
+        this.billID = billID;
+        this.date = date;
+        this.total = total;
     }
 
     public String getBillID() {
@@ -48,5 +55,13 @@ public class Bill {
 
     public void setDrugs(List<Drug> drugs) {
         this.drugs = drugs;
+    }
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
     }
 }

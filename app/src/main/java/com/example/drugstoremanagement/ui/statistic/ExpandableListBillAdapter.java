@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.drugstoremanagement.R;
 import com.example.drugstoremanagement.data.db.model.Bill;
@@ -33,7 +34,7 @@ public class ExpandableListBillAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int i) {
-        return data.size();
+        return data.get(dates.get(i)).size();
     }
 
     @Override

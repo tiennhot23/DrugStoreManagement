@@ -19,7 +19,7 @@ public class AppDatabase extends SQLiteOpenHelper {
         String createDrugTable = "create table Drug (" +
                 " drugId text primary key, " +
                 " drugName text, " +
-                " unit integer, " +
+                " unit text, " +
                 " amount integer, " +
                 " price integer )";
         String createDrugStoreTable = "create table DrugStore (" +

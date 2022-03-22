@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import com.example.drugstoremanagement.data.db.model.Bill;
 import com.example.drugstoremanagement.data.db.model.DrugStore;
 import com.example.drugstoremanagement.data.db.model.HistorySearch;
 
@@ -98,6 +99,31 @@ public class DBHelper {
         values.put("drugStoreName", drugStore.getDrugStoreName());
         values.put("address", drugStore.getAddress());
         return db.update("DrugStore", values, "drugStoreId = ?", new String[]{drugStore.getDrugStoreID()});
+    }
+
+    /*=============DRUG=====================*/
+
+
+    /*=============STATISTIC=====================*/
+    public List<Bill> getBillByDrugStore(String drugStoreId) {
+        List<Bill> data = new ArrayList<>();
+        SQLiteDatabase db = appDatabase.getReadableDatabase();
+        String query = "select b.billId, date, total from bill b, " +
+                "(select  b.billId, sum(d.price * db.amount) as total " +
+                "from Bill b, DetailBill db, Drug d " +
+                "where b.billId = db.billId and db.drugId = d.drugId and b.drugStoreId = ?" +
+                "group by b.billId) db " +
+                "where b.billId = db.billId " +
+                "order by b.date ";
+        Cursor cursor = db.rawQuery(query, new String[]{drugStoreId});
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            Bill bill = new Bill(cursor.getString(0), cursor.getString(1), cursor.getLong(2));
+            data.add(bill);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return data;
     }
 
 }

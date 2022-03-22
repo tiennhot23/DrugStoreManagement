@@ -4,11 +4,11 @@ public class Drug {
 
     private String drugID;
     private String drugName;
-    private int unit;
+    private String unit;
     private int amount;
     private long price;
 
-    public Drug(String drugID, String drugName, int unit, int amount, long price) {
+    public Drug(String drugID, String drugName, String unit, int amount, long price) {
         this.drugID = drugID;
         this.drugName = drugName;
         this.unit = unit;
@@ -35,11 +35,11 @@ public class Drug {
         this.drugName = drugName;
     }
 
-    public int getUnit() {
+    public String getUnit() {
         return unit;
     }
 
-    public void setUnit(int unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
 

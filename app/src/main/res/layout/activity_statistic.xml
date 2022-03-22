@@ -61,7 +61,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/line"
-            android:layout_marginVertical="15dp" />
+            android:layout_marginVertical="15dp"
+            android:groupIndicator="@drawable/expandlist_indicator"
+            android:overScrollMode="never" />
         <LinearLayout
             android:id="@+id/line"
             android:layout_width="match_parent"

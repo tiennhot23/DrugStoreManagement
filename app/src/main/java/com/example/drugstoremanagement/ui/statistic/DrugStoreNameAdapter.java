@@ -38,6 +38,10 @@ public class DrugStoreNameAdapter extends ArrayAdapter<String> {
         return drugStores.get(i).getDrugStoreName();
     }
 
+    public String getItemID(int position) {
+        return drugStores.get(position).getDrugStoreID();
+    }
+
     @SuppressLint("ViewHolder")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
