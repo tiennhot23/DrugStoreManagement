@@ -20,7 +20,7 @@
                 android:layout_margin="10dp"
                 app:cardCornerRadius="25dp">
                 <ImageView
-                    android:id="@+id/btn_cancel"
+                    android:id="@+id/btnCancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -44,54 +44,109 @@
                     android:id="@+id/txt_drugstore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/edt_drugstore_name"
-                    android:layout_alignBottom="@+id/edt_drugstore_name"
+                    android:layout_alignTop="@+id/edt_drug_name"
+                    android:layout_alignBottom="@+id/edt_drug_name"
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="10dp"
                     android:gravity="center_vertical"
-                    android:text="@string/drugstore_"
+                    android:text="@string/drug"
                     android:textColor="@color/dark_text"
                     android:textSize="@dimen/text_normal"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/edt_drugstore_name"
+                    android:id="@+id/edt_drug_name"
                     style="@style/MyEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/txt_drugstore"
-                    android:textSize="@dimen/text_normal"/>
+                    android:textSize="@dimen/text_normal" />
 
                 <TextView
-                    android:id="@+id/txt_address"
+                    android:id="@+id/txt_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txt_drugstore"
-                    android:layout_alignTop="@+id/edt_address"
+                    android:layout_alignTop="@+id/edt_amount"
                     android:layout_alignEnd="@+id/txt_drugstore"
-                    android:layout_alignBottom="@+id/edt_address"
-                    android:layout_marginEnd="10dp"
+                    android:layout_alignBottom="@+id/edt_amount"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
                     android:gravity="center_vertical"
-                    android:text="@string/address_"
+                    android:text="@string/amount_"
                     android:textColor="@color/dark_text"
-                    android:textSize="@dimen/text_normal"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/edt_address"
+                    android:id="@+id/edt_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_normal"
-                    android:layout_below="@id/edt_drugstore_name"
+                    android:layout_below="@id/edt_drug_name"
                     android:layout_marginTop="10dp"
-                    android:layout_alignStart="@id/edt_drugstore_name"
+                    android:layout_alignStart="@id/edt_drug_name"
                     style="@style/MyEditText"/>
+
+                <TextView
+                    android:id="@+id/txt_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_amount"
+                    android:layout_alignTop="@+id/edt_price"
+                    android:layout_alignEnd="@+id/txt_amount"
+                    android:layout_alignBottom="@+id/edt_price"
+
+                    android:gravity="center_vertical"
+                    android:text="@string/price"
+                    android:textColor="@color/dark_text"
+                    android:textSize="@dimen/text_normal"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/edt_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_normal"
+                    android:layout_below="@id/edt_amount"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignStart="@id/edt_amount"
+                    style="@style/MyEditText"/>
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_price"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/txt_unit"-->
+<!--                    android:layout_alignTop="@+id/edt_price"-->
+<!--                    android:layout_alignEnd="@+id/txt_unit"-->
+<!--                    android:layout_alignBottom="@+id/edt_price"-->
+
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:text="@string/price"-->
+<!--                    android:textColor="@color/dark_text"-->
+<!--                    android:textSize="@dimen/text_normal"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/edt_price"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="@dimen/text_normal"-->
+<!--                    android:layout_below="@id/edt_unit"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_alignStart="@id/edt_unit"-->
+<!--                    style="@style/MyEditText"/>-->
+
+
+
 
 
 
             </RelativeLayout>
             <Button
-                android:id="@+id/btn_save"
+                android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"

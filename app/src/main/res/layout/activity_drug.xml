@@ -4,30 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.drugstore.DrugStoreActivity"
+    tools:context=".ui.drug.DrugActivity"
     android:background="@color/background"
     android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/dark_card"
 
+        >
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="10dp"
+            android:src="@drawable/ic_back" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:text="DRUG"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:paddingTop="10dp"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
     <androidx.cardview.widget.CardView
         app:cardBackgroundColor="@color/light_card"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
-        app:cardCornerRadius="15dp"
+        app:cardCornerRadius="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerInParent="true"
-                android:layout_marginHorizontal="10dp"
-                android:src="@drawable/ic_back_dark" />
 
             <EditText
                 android:id="@+id/edt_search"
@@ -38,8 +54,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:layout_toStartOf="@id/btn_search"
-                android:layout_toEndOf="@+id/btn_back" />
+                android:layout_toStartOf="@id/btn_search" />
 
             <ImageView
                 android:id="@+id/btn_search"
@@ -53,7 +68,17 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-    
+    <com.nex3z.flowlayout.FlowLayout
+        android:id="@+id/history_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:flChildSpacingForLastRow="align"
+        app:flMaxRows="3"
+        app:flRowSpacing="8dp">
+
+    </com.nex3z.flowlayout.FlowLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -66,6 +91,7 @@
             android:layout_alignTop="@+id/card_add"
             android:layout_marginHorizontal="10dp">
             <LinearLayout
+                android:layout_marginStart="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/dark_primary"
@@ -90,12 +116,11 @@
                 android:src="@drawable/ic_add"/>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
-    
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+        android:id="@+id/recycleViewDrug"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
-        android:layout_margin="5dp"/>
-
+        android:layout_margin="12dp"/>
 </LinearLayout>

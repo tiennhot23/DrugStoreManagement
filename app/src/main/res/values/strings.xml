@@ -4,10 +4,12 @@
 
     <string name="something_wrong">Có lỗi xảy ra</string>
     <string name="drugstore">Nhà thuốc</string>
+    <string name="drug">Tên thuốc</string>
     <string name="address">Địa chỉ</string>
     <string name="drugstore_">Nhà thuốc:</string>
     <string name="address_">Địa chỉ: </string>
     <string name="save">Lưu</string>
+    <string name="unit">Đơn vị:</string>
 
 
     <!-- operation -->
@@ -17,6 +19,9 @@
     <!-- validate -->
     <string name="empty_drugstore_name">Tên nhà thuốc không được bỏ trống</string>
     <string name="empty_address">Địa chỉ không được bỏ trống</string>
+    <string name="empty_price">Giá tiền không được bỏ trống</string>
+    <string name="empty_amount">Số lượng không được bỏ trống</string>
     <string name="amount_">Số lượng:</string>
     <string name="unit_">Đơn vị tính:</string>
+    <string name="price">Giá:</string>
 </resources>

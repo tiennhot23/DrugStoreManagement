@@ -35,10 +35,20 @@
         <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/item_drug.xml" value="0.21458333333333332" />
         <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/item_drugstore.xml" value="0.33" />
         <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/progress_dialog.xml" value="0.1390625" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/drawable/dialog_background.xml" value="0.2703125" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/activity_drug.xml" value="0.431924882629108" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/activity_drug_store.xml" value="0.13125" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/activity_splash_screen.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/drug_dialog.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/drug_store_dialog.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/item_drug.xml" value="0.4" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/item_drugstore.xml" value="0.4" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/progress_dialog.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="jbr-11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

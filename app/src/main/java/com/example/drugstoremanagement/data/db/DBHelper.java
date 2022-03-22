@@ -3,8 +3,11 @@ package com.example.drugstoremanagement.data.db;
 import android.content.Context;
 import android.util.Log;
 import androidx.lifecycle.LiveData;
+
+import com.example.drugstoremanagement.data.db.dao.DrugDao;
 import com.example.drugstoremanagement.data.db.dao.DrugStoreDao;
 import com.example.drugstoremanagement.data.db.dao.HistorySearchDao;
+import com.example.drugstoremanagement.data.db.model.Drug;
 import com.example.drugstoremanagement.data.db.model.DrugStore;
 import com.example.drugstoremanagement.data.db.model.HistorySearch;
 
@@ -17,11 +20,13 @@ public class DBHelper {
     private ExecutorService executor;
     private HistorySearchDao historySearchDao;
     private DrugStoreDao drugStoreDao;
+    private DrugDao drugDao;
 
     public DBHelper(Context context) {
         executor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
         historySearchDao = AppDatabase.getInstance(context).historySearchDao();
         drugStoreDao = AppDatabase.getInstance(context).drugStoreDao();
+        drugDao = AppDatabase.getInstance(context).drugDao();
     }
 
     public LiveData<List<HistorySearch>> getHistorySearch() {
@@ -87,6 +92,56 @@ public class DBHelper {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             Log.e("UPDATE_DRUGSTORE", e.getMessage());
+            return -1;
+        }
+    }
+
+    /*=============DRUG=====================*/
+
+    public List<Drug> getDrug() {
+        Future<List<Drug>> future = executor.submit(() -> drugDao.getAll());
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            Log.e("GET_DRUG", e.getMessage());
+            return null;
+        }
+    }
+
+    public List<Drug> findDrug(String query) {
+        Future<List<Drug>> future = executor.submit(() -> drugDao.findDrugs(query));
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            Log.e("FIND_DRUG", e.getMessage());
+            return null;
+        }
+    }
+
+    public long insertDrug(Drug drug) {
+        Future<Long> future = executor.submit(() -> {
+            return drugDao.insert(drug);
+        });
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            Log.e("INSERT_DRUG", e.getMessage());
+            return -1;
+        }
+    }
+
+    public int updateDrug(Drug drug) {
+        Future<Integer> future = executor.submit(() -> {
+            return drugDao.update(drug);
+        });
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            Log.e("UPDATE_DRUG", e.getMessage());
             return -1;
         }
     }
