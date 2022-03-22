@@ -1,25 +1,14 @@
 package com.example.drugstoremanagement.data.db.model;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-
-@Entity
 public class Drug {
-    @PrimaryKey
-    @NonNull
-    public String drugID;
-    @NonNull
-    public String drugName;
-    @NonNull
-    public int unit;
-    @NonNull
-    public int amount;
-    @NonNull
-    public long price;
 
-    public Drug(String drugID, String drugName, int unit, int amount, long price) {
+    private String drugID;
+    private String drugName;
+    private String unit;
+    private int amount;
+    private long price;
+
+    public Drug(String drugID, String drugName, String unit, int amount, long price) {
         this.drugID = drugID;
         this.drugName = drugName;
         this.unit = unit;
@@ -27,7 +16,46 @@ public class Drug {
         this.price = price;
     }
 
-    @Ignore
     public Drug(){
+    }
+
+    public String getDrugID() {
+        return drugID;
+    }
+
+    public void setDrugID(String drugID) {
+        this.drugID = drugID;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
     }
 }

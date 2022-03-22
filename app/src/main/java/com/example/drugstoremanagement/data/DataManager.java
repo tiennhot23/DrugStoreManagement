@@ -3,6 +3,7 @@ package com.example.drugstoremanagement.data;
 import android.content.Context;
 import androidx.lifecycle.LiveData;
 import com.example.drugstoremanagement.data.db.DBHelper;
+import com.example.drugstoremanagement.data.db.model.Bill;
 import com.example.drugstoremanagement.data.db.model.DrugStore;
 import com.example.drugstoremanagement.data.db.model.HistorySearch;
 
@@ -45,6 +46,10 @@ public class DataManager {
 
     public boolean updateDrugStore(DrugStore drugStore) {
         return dbHelper.updateDrugStore(drugStore) >= 0;
+    }
+
+    public List<Bill> getBillByDrugStore(String drugStoreId) {
+        return dbHelper.getBillByDrugStore(drugStoreId);
     }
 
 }

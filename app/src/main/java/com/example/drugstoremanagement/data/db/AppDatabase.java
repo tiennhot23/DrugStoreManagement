@@ -1,35 +1,57 @@
 package com.example.drugstoremanagement.data.db;
 
 import android.content.Context;
-import androidx.room.Database;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import com.example.drugstoremanagement.data.db.dao.DrugStoreDao;
-import com.example.drugstoremanagement.data.db.dao.HistorySearchDao;
-import com.example.drugstoremanagement.data.db.model.*;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import androidx.annotation.Nullable;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+public class AppDatabase extends SQLiteOpenHelper {
 
-@Database(entities = {HistorySearch.class, DrugStore.class, Drug.class, Bill.class, DetailBill.class}, version = 1)
-public abstract class AppDatabase extends RoomDatabase {
+    private static final String DATABASE_NAME = "DATABASE";
+    private static final int DATABASE_VERSION = 1;
 
-    public abstract HistorySearchDao historySearchDao();
-
-    public abstract DrugStoreDao drugStoreDao();
-
-    private static volatile AppDatabase instance;
-
-    public static AppDatabase getInstance(final Context context) {
-        if (instance == null) {
-            synchronized (AppDatabase.class) {
-                if (instance == null) {
-                    instance = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "DATABASE")
-                            .build();
-                }
-            }
-        }
-        return instance;
+    public AppDatabase(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        String createDrugTable = "create table Drug (" +
+                " drugId text primary key, " +
+                " drugName text, " +
+                " unit text, " +
+                " amount integer, " +
+                " price integer )";
+        String createDrugStoreTable = "create table DrugStore (" +
+                " drugStoreId text primary key, " +
+                " drugStoreName text, " +
+                " address text )";
+        String createBillTable = "create table Bill (" +
+                " billId text primary key, " +
+                " drugStoreId text, " +
+                " date text, " +
+                " foreign key(drugStoreId) references DrugStore(drugStoreId) " +
+                " on update cascade on delete cascade )";
+        String createDetailBillTable = "create table DetailBill (" +
+                " billId text, " +
+                " drugId text, " +
+                " amount integer," +
+                " primary key(billId, drugId), " +
+                " foreign key(billId) references Bill(billId) " +
+                " on update cascade on delete cascade, " +
+                " foreign key(drugId) references Drug(drugId) " +
+                " on update cascade on delete cascade )";
+        String createHistorySearchTable = "create table HistorySearch(search text primary key)";
+        sqLiteDatabase.execSQL(createDrugTable);
+        sqLiteDatabase.execSQL(createDrugStoreTable);
+        sqLiteDatabase.execSQL(createBillTable);
+        sqLiteDatabase.execSQL(createDetailBillTable);
+        sqLiteDatabase.execSQL(createHistorySearchTable);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+    }
+
 }
