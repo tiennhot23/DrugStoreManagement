@@ -3,6 +3,7 @@ package com.example.drugstoremanagement.ui.drug;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -75,16 +76,19 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
                         onError(R.string.empty_price);
                         return;
                     }
-                    drug.drugID = generateDrugStoreID();
-                   drug.drugName = edt_drug_name.getText().toString().trim();
+
+
+                       drug.drugID = generateDrugStoreID();
+
+                    drug.drugName = edt_drug_name.getText().toString().trim();
                     drug.amount = Integer.parseInt(edt_amount.getText().toString().trim());
                     drug.unit = 0;
                     drug.price = Integer.parseInt(edt_price.getText().toString().trim());
-
                     if (DataManager.getInstance(context).insertDrug(drug)) {
                         callback.success();
                     } else {
                         callback.fail();
+                        Toast.makeText(view.getContext(), "SAI CHO NAO V", Toast.LENGTH_SHORT).show();
                     }
                     dismiss();
                 } else {
@@ -105,6 +109,8 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
                     drug.price = Integer.parseInt(edt_price.getText().toString().trim());
                     if (DataManager.getInstance(context).updateDrug(drug)) {
                         callback.success();
+                        Toast.makeText(getContext(), DataManager.getInstance(context).updateDrug(drug)+"XXX", Toast.LENGTH_SHORT).show();
+
                     }
                     dismiss();
                 }
@@ -132,6 +138,6 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
     @SuppressLint("DefaultLocale")
     private String generateDrugStoreID() {
         int n = DataManager.getInstance(context).getDrug().size() + 1;
-        return String.format("DS%04d", n);
+        return String.format("T%04d", n);
     }
 }

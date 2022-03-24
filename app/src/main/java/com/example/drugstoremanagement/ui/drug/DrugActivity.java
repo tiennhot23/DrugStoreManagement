@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
@@ -40,7 +41,8 @@ public class DrugActivity extends BaseActivity implements View.OnClickListener,D
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drug);
         setup();
-        setAnimation(R.anim.layout_animation_left_to_right);
+
+
     }
 
     public void setup(){
@@ -51,6 +53,9 @@ public class DrugActivity extends BaseActivity implements View.OnClickListener,D
         btn_back.setOnClickListener(this);
 
         recyclerViewDrug.setLayoutManager(new LinearLayoutManager(this));
+        LayoutAnimationController layoutAnimationController = AnimationUtils.loadLayoutAnimation(this,R.anim.layout_animation_left_to_right);
+        recyclerViewDrug.setLayoutAnimation(layoutAnimationController);
+        recyclerViewDrug.setAdapter(new DrugAdapter(this, this, listDrug));
 
 
 
@@ -60,13 +65,13 @@ public class DrugActivity extends BaseActivity implements View.OnClickListener,D
     private void searchDrug(String query) {
         listDrug.clear();
         listDrug.addAll(DataManager.getInstance(this).findDrug(query));
+        LayoutAnimationController layoutAnimationController = AnimationUtils.loadLayoutAnimation(this,R.anim.layout_animation_left_to_right);
+        recyclerViewDrug.setLayoutAnimation(layoutAnimationController);
         if (recyclerViewDrug.getAdapter() != null) recyclerViewDrug.getAdapter().notifyDataSetChanged();
     }
-    public void setAnimation(int animation){
-        LayoutAnimationController layoutAnimationController = AnimationUtils.loadLayoutAnimation(this,animation);
-        recyclerViewDrug.setLayoutAnimation(layoutAnimationController);
-        recyclerViewDrug.setAdapter(new DrugAdapter(this, this, listDrug));
-    }
+//    public void setAnimation(int animation){
+//
+//    }
 
     public void setControl(){
         txtSearch = findViewById(R.id.edt_search);

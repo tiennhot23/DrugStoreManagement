@@ -146,4 +146,17 @@ public class DBHelper {
         }
     }
 
+    public int deleteDrug(Drug drug) {
+        Future<Integer> future = executor.submit(() -> {
+            return drugDao.delete(drug);
+        });
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            Log.e("UPDATE_DRUG", e.getMessage());
+            return -1;
+        }
+    }
+
 }

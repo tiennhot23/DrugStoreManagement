@@ -64,5 +64,8 @@ public class DataManager {
         return dbHelper.updateDrug(drug) >= 0;
     }
 
+    public boolean delete(Drug drug) {
+       return dbHelper.deleteDrug(drug) >=0;
+    }
 
 }
