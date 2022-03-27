@@ -10,6 +10,9 @@
         android:theme="@style/Theme.DrugStoreManagement">
 
         <activity
+            android:name=".ui.statistic.StatisticActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="true">
             <intent-filter>

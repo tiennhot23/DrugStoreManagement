@@ -1,28 +1,67 @@
 package com.example.drugstoremanagement.data.db.model;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
+import java.util.List;
 
-@Entity(foreignKeys = {@ForeignKey(entity = DrugStore.class, parentColumns = "drugStoreID", childColumns = "drugStoreID")})
 public class Bill {
-    @PrimaryKey
-    @NonNull
-    public String billID;
-    @NonNull
-    public String date;
-    @NonNull
-    public String drugStoreID;
+    private String billID;
+    private String date;
+    private String drugStoreID;
+    private List<Drug> drugs;
+    private long total;
 
-    public Bill(String billID, String date, String drugStoreID) {
+    public Bill(String billID, String date, String drugStoreID, List<Drug> drugs) {
         this.billID = billID;
         this.date = date;
         this.drugStoreID = drugStoreID;
+        this.drugs = drugs;
     }
 
-    @Ignore
     public Bill(){
+    }
+
+    public Bill(String billID, String date, long total){
+        this.billID = billID;
+        this.date = date;
+        this.total = total;
+    }
+
+    public String getBillID() {
+        return billID;
+    }
+
+    public void setBillID(String billID) {
+        this.billID = billID;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDrugStoreID() {
+        return drugStoreID;
+    }
+
+    public void setDrugStoreID(String drugStoreID) {
+        this.drugStoreID = drugStoreID;
+    }
+
+    public List<Drug> getDrugs() {
+        return drugs;
+    }
+
+    public void setDrugs(List<Drug> drugs) {
+        this.drugs = drugs;
+    }
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
     }
 }

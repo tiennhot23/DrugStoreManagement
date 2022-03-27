@@ -4,6 +4,7 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import com.example.drugstoremanagement.data.db.DBHelper;
 import com.example.drugstoremanagement.data.db.model.Drug;
+import com.example.drugstoremanagement.data.db.model.Bill;
 import com.example.drugstoremanagement.data.db.model.DrugStore;
 import com.example.drugstoremanagement.data.db.model.HistorySearch;
 
@@ -47,6 +48,8 @@ public class DataManager {
     public boolean updateDrugStore(DrugStore drugStore) {
         return dbHelper.updateDrugStore(drugStore) >= 0;
     }
+  
+
 
 
     public List<Drug> getDrug(){
@@ -66,6 +69,13 @@ public class DataManager {
 
     public boolean delete(Drug drug) {
        return dbHelper.deleteDrug(drug) >=0;
+    }
+  
+  
+  
+
+    public List<Bill> getBillByDrugStore(String drugStoreId) {
+        return dbHelper.getBillByDrugStore(drugStoreId);
     }
 
 }
