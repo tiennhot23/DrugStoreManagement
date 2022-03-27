@@ -8,6 +8,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DrugStoreManagement">
+
         <activity
             android:name=".ui.statistic.StatisticActivity"
             android:exported="true" />
@@ -28,6 +29,9 @@
             android:exported="true" />
         <activity
             android:name=".ui.bill.BillActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.drug.DrugActivity"
             android:exported="true" />
     </application>
 

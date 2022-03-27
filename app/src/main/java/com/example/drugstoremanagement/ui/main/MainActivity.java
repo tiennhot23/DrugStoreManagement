@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.cardview.widget.CardView;
 import com.example.drugstoremanagement.R;
 import com.example.drugstoremanagement.ui.base.BaseActivity;
+import com.example.drugstoremanagement.ui.drug.DrugActivity;
 import com.example.drugstoremanagement.ui.drugstore.DrugStoreActivity;
 import com.example.drugstoremanagement.ui.statistic.StatisticActivity;
 
@@ -59,6 +60,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.card_drug:
+                startActivity(new Intent(this, DrugActivity.class));
                 break;
             case R.id.card_drugstore:
                 startActivity(new Intent(this, DrugStoreActivity.class));
