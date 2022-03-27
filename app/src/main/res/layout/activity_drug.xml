@@ -21,15 +21,16 @@
             android:layout_centerInParent="true"
             android:layout_marginHorizontal="10dp"
             android:src="@drawable/ic_back" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="20sp"
-            android:text="DRUG"
-            android:textStyle="bold"
-            android:textAlignment="center"
             android:paddingTop="10dp"
-            android:textColor="@color/white"/>
+            android:text="DRUG"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
     <androidx.cardview.widget.CardView

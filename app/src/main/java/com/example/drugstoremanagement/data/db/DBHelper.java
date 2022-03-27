@@ -132,64 +132,69 @@ public class DBHelper {
     // todo: chuyển sang sqlite
   
     public List<Drug> getDrug() {
-        Future<List<Drug>> future = executor.submit(() -> drugDao.getAll());
-        try {
-            return future.get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-            Log.e("GET_DRUG", e.getMessage());
-            return null;
-        }
+//        Future<List<Drug>> future = executor.submit(() -> drugDao.getAll());
+//        try {
+//            return future.get();
+//        } catch (ExecutionException | InterruptedException e) {
+//            e.printStackTrace();
+//            Log.e("GET_DRUG", e.getMessage());
+//            return null;
+//        }
+        return new ArrayList<>();
     }
 
     public List<Drug> findDrug(String query) {
-        Future<List<Drug>> future = executor.submit(() -> drugDao.findDrugs(query));
-        try {
-            return future.get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-            Log.e("FIND_DRUG", e.getMessage());
-            return null;
-        }
+//        Future<List<Drug>> future = executor.submit(() -> drugDao.findDrugs(query));
+//        try {
+//            return future.get();
+//        } catch (ExecutionException | InterruptedException e) {
+//            e.printStackTrace();
+//            Log.e("FIND_DRUG", e.getMessage());
+//            return null;
+//        }
+        return null;
     }
 
     public long insertDrug(Drug drug) {
-        Future<Long> future = executor.submit(() -> {
-            return drugDao.insert(drug);
-        });
-        try {
-            return future.get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-            Log.e("INSERT_DRUG", e.getMessage());
-            return -1;
-        }
+//        Future<Long> future = executor.submit(() -> {
+//            return drugDao.insert(drug);
+//        });
+//        try {
+//            return future.get();
+//        } catch (ExecutionException | InterruptedException e) {
+//            e.printStackTrace();
+//            Log.e("INSERT_DRUG", e.getMessage());
+//            return -1;
+//        }
+        return -1;
     }
 
     public int updateDrug(Drug drug) {
-        Future<Integer> future = executor.submit(() -> {
-            return drugDao.update(drug);
-        });
-        try {
-            return future.get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-            Log.e("UPDATE_DRUG", e.getMessage());
-            return -1;
-        }
+//        Future<Integer> future = executor.submit(() -> {
+//            return drugDao.update(drug);
+//        });
+//        try {
+//            return future.get();
+//        } catch (ExecutionException | InterruptedException e) {
+//            e.printStackTrace();
+//            Log.e("UPDATE_DRUG", e.getMessage());
+//            return -1;
+//        }
+        return -1;
     }
 
     public int deleteDrug(Drug drug) {
-        Future<Integer> future = executor.submit(() -> {
-            return drugDao.delete(drug);
-        });
-        try {
-            return future.get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-            Log.e("UPDATE_DRUG", e.getMessage());
-            return -1;
-        }
+//        Future<Integer> future = executor.submit(() -> {
+//            return drugDao.delete(drug);
+//        });
+//        try {
+//            return future.get();
+//        } catch (ExecutionException | InterruptedException e) {
+//            e.printStackTrace();
+//            Log.e("UPDATE_DRUG", e.getMessage());
+//            return -1;
+//        }
+        return -1;
     }
 
 }
