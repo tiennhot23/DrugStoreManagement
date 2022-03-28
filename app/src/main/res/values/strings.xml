@@ -21,7 +21,11 @@
     <string name="empty_address">Địa chỉ không được bỏ trống</string>
     <string name="empty_price">Giá tiền không được bỏ trống</string>
     <string name="empty_amount">Số lượng không được bỏ trống</string>
+  
+  
+    <!-- message -->
     <string name="amount_">Số lượng:</string>
     <string name="unit_">Đơn vị tính:</string>
     <string name="price">Giá:</string>
+    <string name="statistic">Thống kê</string>
 </resources>

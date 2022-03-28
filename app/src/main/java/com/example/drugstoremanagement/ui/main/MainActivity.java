@@ -10,6 +10,7 @@ import com.example.drugstoremanagement.R;
 import com.example.drugstoremanagement.ui.base.BaseActivity;
 import com.example.drugstoremanagement.ui.drug.DrugActivity;
 import com.example.drugstoremanagement.ui.drugstore.DrugStoreActivity;
+import com.example.drugstoremanagement.ui.statistic.StatisticActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -67,6 +68,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.card_bill:
                 break;
             case R.id.card_statistic:
+                startActivity(new Intent(this, StatisticActivity.class));
                 break;
             default:
                 break;

@@ -38,10 +38,10 @@ public class DrugAdapter extends RecyclerView.Adapter<DrugAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtDrugName.setText(listDrug.get(position).drugName);
-        holder.txtAmount.setText(listDrug.get(position).amount+"");
+        holder.txtDrugName.setText(listDrug.get(position).getDrugName());
+        holder.txtAmount.setText(listDrug.get(position).getAmount());
         //holder.txtUnit.setText(listDrug.get(position).unit);
-        holder.txtPrice.setText(listDrug.get(position).price+"");
+        holder.txtPrice.setText(String.valueOf(listDrug.get(position).getPrice()));
     }
 
     @Override

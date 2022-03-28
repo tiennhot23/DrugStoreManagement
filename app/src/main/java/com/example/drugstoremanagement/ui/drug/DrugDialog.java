@@ -51,10 +51,10 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
         btnSave = findViewById(R.id.btnSave);
         btnCancel = findViewById(R.id.btnCancel);
 
-        edt_drug_name.setText(drug.drugName);
+        edt_drug_name.setText(drug.getDrugName());
 //        edt_unit.setText(drug.unit+"");
-        edt_amount.setText(drug.amount+"");
-        edt_price.setText(drug.price+"");
+        edt_amount.setText(drug.getAmount()+"");
+        edt_price.setText(drug.getPrice()+"");
         btnSave.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
     }
@@ -63,7 +63,7 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.btnSave:
-                if (drug.drugID == null || drug.drugID.equals("")) {
+                if (drug.getDrugID() == null || drug.getDrugID().equals("")) {
                     if (edt_drug_name.getText().toString().trim().equals("")) {
                         onError(R.string.empty_drugstore_name);
                         return;
@@ -78,12 +78,13 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
                     }
 
 
-                       drug.drugID = generateDrugStoreID();
+                       drug.setDrugID(generateDrugStoreID());
 
-                    drug.drugName = edt_drug_name.getText().toString().trim();
-                    drug.amount = Integer.parseInt(edt_amount.getText().toString().trim());
-                    drug.unit = 0;
-                    drug.price = Integer.parseInt(edt_price.getText().toString().trim());
+                    drug.setDrugName(edt_drug_name.getText().toString().trim());
+                    drug.setAmount(Integer.parseInt(edt_amount.getText().toString().trim()));
+                    // todo: cái này là đơn vị tính
+                    drug.setUnit("0");
+                    drug.setPrice(Integer.parseInt(edt_price.getText().toString().trim()));
                     if (DataManager.getInstance(context).insertDrug(drug)) {
                         callback.success();
                     } else {
@@ -103,10 +104,11 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
                         onError(R.string.empty_price);
                         return;
                     }
-                    drug.drugName = edt_drug_name.getText().toString().trim();
-                    drug.amount = Integer.parseInt(edt_amount.getText().toString().trim());
-                    drug.unit = 0;
-                    drug.price = Integer.parseInt(edt_price.getText().toString().trim());
+                    drug.setDrugName(edt_drug_name.getText().toString().trim());
+                    drug.setAmount(Integer.parseInt(edt_amount.getText().toString().trim()));
+                    // todo: cái này là đơn vị tính
+                    drug.setUnit("0");
+                    drug.setPrice(Integer.parseInt(edt_price.getText().toString().trim()));
                     if (DataManager.getInstance(context).updateDrug(drug)) {
                         callback.success();
                         Toast.makeText(getContext(), DataManager.getInstance(context).updateDrug(drug)+"XXX", Toast.LENGTH_SHORT).show();
@@ -116,7 +118,7 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
                 }
                 break;
             case R.id.btnCancel:
-                if (drug.drugID != null && drug.drugID.equals("")) {
+                if (drug.getDrugID() != null && drug.getDrugID().equals("")) {
                     callback.fail();
                 }
                 dismiss();
