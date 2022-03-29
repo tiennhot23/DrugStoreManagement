@@ -1,130 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.chauthai.swipereveallayout.SwipeRevealLayout
+    android:id="@+id/SwipeLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:mode="same_level"
+    app:dragEdge="right"
     android:layout_marginHorizontal="5dp"
-    android:layout_marginVertical="10dp">
+    android:layout_marginVertical="10dp"
 
+    >
+
+    <!-- Your secondary layout here -->
     <LinearLayout
+        android:id="@+id/layout_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="@dimen/text_normal"
+            android:background="@android:color/holo_red_dark"
+            android:text="Delete"/>
+    </LinearLayout>
+
+    <!-- Your main layout here -->
+    <androidx.cardview.widget.CardView
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="10"
-        android:background="@drawable/card_background">
+
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="10dp">
+
         <LinearLayout
 
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:orientation="vertical"
-            android:layout_margin="10dp">
-            <TextView
-                android:id="@+id/txtDrugName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pharmacity"
-                tools:ignore="HardcodedText"
-                android:textColor="@color/dark_text"
-                android:textSize="@dimen/text_normal"
-                android:ellipsize="end" />
+            android:weightSum="10"
+            android:background="@drawable/card_background">
             <LinearLayout
-                android:layout_width="match_parent"
+
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
-                android:weightSum="2">
-                <LinearLayout
-                    android:layout_width="0dp"
+                android:layout_weight="10"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+                <TextView
+                    android:id="@+id/txtDrugName"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:text="Pharmacity"
+                    tools:ignore="HardcodedText"
+                    android:textColor="@color/dark_text"
+                    android:textSize="@dimen/text_normal"
+                    android:ellipsize="end" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:weightSum="2">
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp">
-                        <TextView
+                        android:layout_weight="1">
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/amount_"
-                            android:textSize="@dimen/text_small"/>
-                        <TextView
-                            android:id="@+id/txtAmount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:text="17"
-                            android:textSize="@dimen/text_small"
-                            tools:ignore="HardcodedText" />
+                            android:layout_marginVertical="5dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/amount_"
+                                android:textSize="@dimen/text_small"/>
+                            <TextView
+                                android:id="@+id/txtAmount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="17"
+                                android:textSize="@dimen/text_small"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp">
-                        <TextView
+                        android:layout_weight="1">
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/unit_"
-                            android:textSize="@dimen/text_small"/>
-                        <TextView
-                            android:id="@+id/txt_unit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:text="viên"
-                            android:textSize="@dimen/text_small"
-                            tools:ignore="HardcodedText" />
+                            android:layout_marginVertical="5dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/unit_"
+                                android:textSize="@dimen/text_small"/>
+                            <TextView
+                                android:id="@+id/txt_unit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="viên"
+                                android:textSize="@dimen/text_small"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="3"
-            >
-            <TextView
-                android:layout_gravity="center_vertical"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$"
+                android:orientation="horizontal"
+                android:layout_weight="3"
+                >
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$"
 
-                />
-            <TextView
-                android:id="@+id/tvPrice"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="30"
+                    />
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30"
 
-                />
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_update"
-                app:cardBackgroundColor="@color/dark_primary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="22dp">
-                <ImageView
-                    android:id="@+id/btnUpdate"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_update"
+                    app:cardBackgroundColor="@color/dark_primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
                     android:layout_margin="10dp"
-                    android:src="@drawable/ic_refresh"/>
-            </androidx.cardview.widget.CardView>
+                    app:cardCornerRadius="22dp">
+                    <ImageView
+                        android:id="@+id/btnUpdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/ic_refresh"/>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
         </LinearLayout>
 
 
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
-</androidx.cardview.widget.CardView>
+</com.chauthai.swipereveallayout.SwipeRevealLayout>

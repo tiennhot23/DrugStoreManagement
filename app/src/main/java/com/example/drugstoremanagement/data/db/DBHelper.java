@@ -129,7 +129,7 @@ public class DBHelper {
 
     
     /*=============DRUG=====================*/
-    // todo: chuyển sang sqlite
+    // todo: chuyển sang sqlite : done
   
     public List<Drug> getDrug() {
         List<Drug> data = new ArrayList<>();

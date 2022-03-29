@@ -5,14 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chauthai.swipereveallayout.SwipeRevealLayout;
+import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.drugstoremanagement.R;
 import com.example.drugstoremanagement.RecyclerListener;
+import com.example.drugstoremanagement.data.DataManager;
 import com.example.drugstoremanagement.data.db.model.Drug;
 import com.example.drugstoremanagement.data.db.model.DrugStore;
 
@@ -23,6 +27,7 @@ public class DrugAdapter extends RecyclerView.Adapter<DrugAdapter.ViewHolder> {
     private Context context;
     private RecyclerListener listener;
     private List<Drug> listDrug;
+    private ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
 
     public DrugAdapter(Context context, RecyclerListener listener, List<Drug> listDrug) {
         this.context = context;
@@ -43,6 +48,15 @@ public class DrugAdapter extends RecyclerView.Adapter<DrugAdapter.ViewHolder> {
         holder.txtAmount.setText(listDrug.get(position).getAmount()+"");
         holder.txtUnit.setText(listDrug.get(position).getUnit());
         holder.txtPrice.setText(String.valueOf(listDrug.get(position).getPrice()));
+        viewBinderHelper.bind(holder.swipeRevealLayout,listDrug.get(position).getDrugID());
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DataManager.getInstance(context).delete(listDrug.get(holder.getAdapterPosition()));
+                listDrug.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -53,6 +67,8 @@ public class DrugAdapter extends RecyclerView.Adapter<DrugAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView btnUpdate;
         TextView txtDrugName,txtAmount,txtUnit,txtPrice;
+        SwipeRevealLayout swipeRevealLayout;
+        LinearLayout linearLayout;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -64,6 +80,8 @@ public class DrugAdapter extends RecyclerView.Adapter<DrugAdapter.ViewHolder> {
             txtUnit = itemView.findViewById(R.id.txt_unit);
 
             txtPrice = itemView.findViewById(R.id.tvPrice);
+            swipeRevealLayout = itemView.findViewById(R.id.SwipeLayout);
+            linearLayout = itemView.findViewById(R.id.layout_delete);
 
             btnUpdate.setOnClickListener(v -> {
                 listener.onItemClick(getAdapterPosition());
