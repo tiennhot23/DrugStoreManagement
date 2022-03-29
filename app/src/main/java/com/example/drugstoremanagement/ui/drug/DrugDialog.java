@@ -170,6 +170,7 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
     @SuppressLint("DefaultLocale")
     private String generateDrugStoreID() {
         int n = DataManager.getInstance(context).getDrug().size() + 1;
-        return String.format("D%04d", n);
+        Toast.makeText(getContext(),DataManager.getInstance(context).getDrug().size()+"X" , Toast.LENGTH_SHORT).show();
+        return String.format("D%03d", n);
     }
 }
