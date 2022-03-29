@@ -72,7 +72,7 @@ public class DBHelper {
     public List<DrugStore> findDrugStore(String s) {
         List<DrugStore> data = new ArrayList<>();
         SQLiteDatabase db = appDatabase.getReadableDatabase();
-        String query = "select * from DrugStore where name like ?";
+        String query = "select * from DrugStore where drugStoreName like ?";
         Cursor cursor = db.rawQuery(query, new String[]{"%" + s + "%"});
         cursor.moveToFirst();
         while(!cursor.isAfterLast()) {
@@ -132,69 +132,60 @@ public class DBHelper {
     // todo: chuyển sang sqlite
   
     public List<Drug> getDrug() {
-//        Future<List<Drug>> future = executor.submit(() -> drugDao.getAll());
-//        try {
-//            return future.get();
-//        } catch (ExecutionException | InterruptedException e) {
-//            e.printStackTrace();
-//            Log.e("GET_DRUG", e.getMessage());
-//            return null;
-//        }
-        return new ArrayList<>();
+        List<Drug> data = new ArrayList<>();
+        SQLiteDatabase db = appDatabase.getReadableDatabase();
+        String query = "select * from Drug";
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            Drug drug = new Drug(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getInt(3),cursor.getLong(4));
+            data.add(drug);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return data;
     }
 
     public List<Drug> findDrug(String query) {
-//        Future<List<Drug>> future = executor.submit(() -> drugDao.findDrugs(query));
-//        try {
-//            return future.get();
-//        } catch (ExecutionException | InterruptedException e) {
-//            e.printStackTrace();
-//            Log.e("FIND_DRUG", e.getMessage());
-//            return null;
-//        }
-        return null;
+        List<Drug> data = new ArrayList<>();
+        SQLiteDatabase db = appDatabase.getReadableDatabase();
+        String sql = "select * from Drug where drugName LIKE ?";
+        Cursor cursor = db.rawQuery(sql, new String[]{"%" + query + "%"});
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            Drug drug = new Drug(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getInt(3),cursor.getLong(4));
+            data.add(drug);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return data;
     }
 
     public long insertDrug(Drug drug) {
-//        Future<Long> future = executor.submit(() -> {
-//            return drugDao.insert(drug);
-//        });
-//        try {
-//            return future.get();
-//        } catch (ExecutionException | InterruptedException e) {
-//            e.printStackTrace();
-//            Log.e("INSERT_DRUG", e.getMessage());
-//            return -1;
-//        }
-        return -1;
+        SQLiteDatabase db = appDatabase.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("drugId", drug.getDrugID());
+        values.put("drugName", drug.getDrugName());
+        values.put("unit", drug.getUnit());
+        values.put("amount", drug.getAmount());
+        values.put("price", drug.getPrice());
+        return db.insert("Drug", null, values);
     }
 
     public int updateDrug(Drug drug) {
-//        Future<Integer> future = executor.submit(() -> {
-//            return drugDao.update(drug);
-//        });
-//        try {
-//            return future.get();
-//        } catch (ExecutionException | InterruptedException e) {
-//            e.printStackTrace();
-//            Log.e("UPDATE_DRUG", e.getMessage());
-//            return -1;
-//        }
-        return -1;
+        SQLiteDatabase db = appDatabase.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("drugId", drug.getDrugID());
+        values.put("drugName", drug.getDrugName());
+        values.put("unit", drug.getUnit());
+        values.put("amount", drug.getAmount());
+        values.put("price", drug.getPrice());
+        return db.update("Drug", values, "drugId = ?", new String[]{drug.getDrugID()});
     }
 
     public int deleteDrug(Drug drug) {
-//        Future<Integer> future = executor.submit(() -> {
-//            return drugDao.delete(drug);
-//        });
-//        try {
-//            return future.get();
-//        } catch (ExecutionException | InterruptedException e) {
-//            e.printStackTrace();
-//            Log.e("UPDATE_DRUG", e.getMessage());
-//            return -1;
-//        }
-        return -1;
+        SQLiteDatabase db = appDatabase.getWritableDatabase();
+        return db.delete("Drug","drugId = ?", new String[]{drug.getDrugID()});
     }
 
 }

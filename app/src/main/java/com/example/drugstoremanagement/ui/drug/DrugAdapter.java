@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,8 +40,8 @@ public class DrugAdapter extends RecyclerView.Adapter<DrugAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtDrugName.setText(listDrug.get(position).getDrugName());
-        holder.txtAmount.setText(listDrug.get(position).getAmount());
-        //holder.txtUnit.setText(listDrug.get(position).unit);
+        holder.txtAmount.setText(listDrug.get(position).getAmount()+"");
+        holder.txtUnit.setText(listDrug.get(position).getUnit());
         holder.txtPrice.setText(String.valueOf(listDrug.get(position).getPrice()));
     }
 
@@ -53,13 +54,15 @@ public class DrugAdapter extends RecyclerView.Adapter<DrugAdapter.ViewHolder> {
         ImageView btnUpdate;
         TextView txtDrugName,txtAmount,txtUnit,txtPrice;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             btnUpdate = itemView.findViewById(R.id.btnUpdate);
             txtDrugName = itemView.findViewById(R.id.txtDrugName);
             txtAmount = itemView.findViewById(R.id.txtAmount);
-           // txtUnit = itemView.findViewById(R.id.txt_unit);
+            txtUnit = itemView.findViewById(R.id.txt_unit);
+
             txtPrice = itemView.findViewById(R.id.tvPrice);
 
             btnUpdate.setOnClickListener(v -> {
