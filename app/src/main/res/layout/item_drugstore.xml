@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/address_"
-                    android:textSize="@dimen/text_small" />
+                    style="@style/SmallText"/>
 
                 <TextView
                     android:id="@+id/txt_address"
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:text="80 Man Thiện"
-                    android:textSize="@dimen/text_small"
+                    style="@style/SmallText"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
         </LinearLayout>

@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="10dp"
-                app:cardCornerRadius="25dp">
+                app:cardCornerRadius="22dp">
                 <ImageView
                     android:id="@+id/btn_cancel"
                     android:layout_width="wrap_content"

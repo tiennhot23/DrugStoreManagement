@@ -79,14 +79,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/amount_"
-                                android:textSize="@dimen/text_small"/>
+                                style="@style/SmallText"/>
                             <TextView
                                 android:id="@+id/txtAmount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
                                 android:text="17"
-                                android:textSize="@dimen/text_small"
+                                style="@style/SmallText"
                                 tools:ignore="HardcodedText" />
                         </LinearLayout>
                     </LinearLayout>
@@ -102,14 +102,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/unit_"
-                                android:textSize="@dimen/text_small"/>
+                                style="@style/SmallText"/>
                             <TextView
                                 android:id="@+id/txt_unit"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
                                 android:text="viên"
-                                android:textSize="@dimen/text_small"
+                                style="@style/SmallText"
                                 tools:ignore="HardcodedText" />
                         </LinearLayout>
                     </LinearLayout>
@@ -126,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$"
-
+                    style="@style/SmallText"
                     />
                 <TextView
                     android:id="@+id/tvPrice"
@@ -134,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="30"
-
+                    style="@style/SmallText"
                     />
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_update"

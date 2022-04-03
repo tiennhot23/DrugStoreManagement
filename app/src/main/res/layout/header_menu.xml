@@ -11,13 +11,15 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.airbnb.lottie.LottieAnimationView
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="150dp"
             app:lottie_autoPlay="true"
             app:lottie_rawRes="@raw/medical_shield"
             app:lottie_loop="true"
             android:layout_margin="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img"
             android:layout_gravity="center"/>
         <TextView
             android:gravity="center"

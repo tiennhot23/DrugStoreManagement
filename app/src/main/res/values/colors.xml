@@ -25,4 +25,5 @@
 
 
     <color name="normal_text">#252525</color>
+    <color name="small_text">#505050</color>
 </resources>
