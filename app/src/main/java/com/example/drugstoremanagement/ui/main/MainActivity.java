@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+
 import androidx.cardview.widget.CardView;
 import com.example.drugstoremanagement.R;
 import com.example.drugstoremanagement.ui.base.BaseActivity;
@@ -15,6 +17,7 @@ import com.example.drugstoremanagement.ui.statistic.StatisticActivity;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     CardView cardDrug, cardDrugStore, cardBill, cardStatistic;
+    RelativeLayout search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         cardDrugStore.setOnClickListener(this);
         cardBill.setOnClickListener(this);
         cardStatistic.setOnClickListener(this);
+        search.setOnClickListener(this);
 
         cardDrug.setVisibility(View.VISIBLE);
         cardDrug.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom));
@@ -54,6 +58,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         cardDrugStore = findViewById(R.id.card_drugstore);
         cardBill = findViewById(R.id.card_bill);
         cardStatistic = findViewById(R.id.card_statistic);
+        search = findViewById(R.id.search);
     }
 
     @Override
@@ -69,6 +74,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.card_statistic:
                 startActivity(new Intent(this, StatisticActivity.class));
+                break;
+            case R.id.search:
+                startActivity(new Intent(this, DrugActivity.class));
                 break;
             default:
                 break;

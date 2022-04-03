@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,7 +46,8 @@ public class DrugStoreActivity extends BaseActivity implements View.OnClickListe
         btnBack.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
         drugStores = DataManager.getInstance(this).getDrugStore();
-
+        LayoutAnimationController layoutAnimationController = AnimationUtils.loadLayoutAnimation(this,R.anim.layout_animation_left_to_right);
+        recycler.setLayoutAnimation(layoutAnimationController);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(new DrugStoreAdapter(this, this, drugStores));
     }
@@ -61,6 +64,8 @@ public class DrugStoreActivity extends BaseActivity implements View.OnClickListe
     private void search(String query) {
         drugStores.clear();
         drugStores.addAll(DataManager.getInstance(this).findDrugStore(query));
+        LayoutAnimationController layoutAnimationController = AnimationUtils.loadLayoutAnimation(this,R.anim.layout_animation_left_to_right);
+        recycler.setLayoutAnimation(layoutAnimationController);
         if (recycler.getAdapter() != null) recycler.getAdapter().notifyDataSetChanged();
     }
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -26,6 +27,7 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
     private Callback callback;
 
     private EditText edtDrugStoreName, edtAddress;
+    private Spinner spinner;
     private Button btnSave;
     private ImageView btnCancel;
 
@@ -50,6 +52,7 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
         edtAddress = findViewById(R.id.edt_address);
         btnSave = findViewById(R.id.btn_save);
         btnCancel = findViewById(R.id.btn_cancel);
+        spinner = findViewById(R.id.spinner);
 
         edtDrugStoreName.setText(drugStore.getDrugStoreName());
         edtAddress.setText(drugStore.getAddress());

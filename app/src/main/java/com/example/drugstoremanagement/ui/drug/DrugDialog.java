@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -16,17 +19,23 @@ import androidx.annotation.NonNull;
 
 import com.example.drugstoremanagement.R;
 import com.example.drugstoremanagement.data.DataManager;
+import com.example.drugstoremanagement.data.db.AppDatabase;
 import com.example.drugstoremanagement.data.db.model.Drug;
 import com.example.drugstoremanagement.ui.base.BaseDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DrugDialog extends BaseDialog implements View.OnClickListener{
     Context context;
     Callback callback;
     Drug drug;
 
-    EditText edt_drug_name,edt_amount,edt_unit,edt_price;
+    EditText edt_drug_name,edt_amount,edt_price;
+    Spinner spinner;
     Button btnSave;
     ImageView btnCancel;
+    List<String> listUnit = new ArrayList<>();
 
     public DrugDialog(@NonNull Context context,Callback callback, Drug drug) {
         super(context);
@@ -46,7 +55,7 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
         setup();
         edt_drug_name = findViewById(R.id.edt_drug_name);
         edt_amount = findViewById(R.id.edt_amount);
-       //edt_unit = findViewById(R.id.edt_unit);
+       spinner = findViewById(R.id.spinner);
         edt_price = findViewById(R.id.edt_price);
         btnSave = findViewById(R.id.btnSave);
         btnCancel = findViewById(R.id.btnCancel);
@@ -57,6 +66,28 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
         edt_price.setText(drug.getPrice()+"");
         btnSave.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
+        eventSpinner();
+    }
+
+    public void eventSpinner(){
+        listUnit.add("Chai");
+        listUnit.add("Viên");
+        listUnit.add("Vỉ");
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_expandable_list_item_1,listUnit);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                drug.setUnit(listUnit.get(i));
+                Log.d("AAA",drug.getUnit());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
 
     @Override
@@ -83,7 +114,7 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
                     drug.setDrugName(edt_drug_name.getText().toString().trim());
                     drug.setAmount(Integer.parseInt(edt_amount.getText().toString().trim()));
                     // todo: cái này là đơn vị tính
-                    drug.setUnit("0");
+
                     drug.setPrice(Integer.parseInt(edt_price.getText().toString().trim()));
                     if (DataManager.getInstance(context).insertDrug(drug)) {
                         callback.success();
@@ -107,11 +138,10 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
                     drug.setDrugName(edt_drug_name.getText().toString().trim());
                     drug.setAmount(Integer.parseInt(edt_amount.getText().toString().trim()));
                     // todo: cái này là đơn vị tính
-                    drug.setUnit("0");
+
                     drug.setPrice(Integer.parseInt(edt_price.getText().toString().trim()));
                     if (DataManager.getInstance(context).updateDrug(drug)) {
                         callback.success();
-                        Toast.makeText(getContext(), DataManager.getInstance(context).updateDrug(drug)+"XXX", Toast.LENGTH_SHORT).show();
 
                     }
                     dismiss();
@@ -119,7 +149,7 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
                 break;
             case R.id.btnCancel:
                 if (drug.getDrugID() != null && drug.getDrugID().equals("")) {
-                    callback.fail();
+                callback.fail();
                 }
                 dismiss();
                 break;
@@ -140,6 +170,7 @@ public class DrugDialog extends BaseDialog implements View.OnClickListener{
     @SuppressLint("DefaultLocale")
     private String generateDrugStoreID() {
         int n = DataManager.getInstance(context).getDrug().size() + 1;
-        return String.format("T%04d", n);
+        Toast.makeText(getContext(),DataManager.getInstance(context).getDrug().size()+"X" , Toast.LENGTH_SHORT).show();
+        return String.format("D%03d", n);
     }
 }

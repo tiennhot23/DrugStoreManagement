@@ -37,6 +37,23 @@
         <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/activity_main2.xml" value="0.25" />
         <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/activity_splash_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/activity_splash_screen2.xml" value="0.1390625" />
+<<<<<<< HEAD
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/drug_store_dialog.xml" value="0.29322916666666665" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/item_drug.xml" value="0.21458333333333332" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/item_drugstore.xml" value="0.33" />
+        <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/progress_dialog.xml" value="0.1390625" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/drawable/dialog_background.xml" value="0.2703125" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/drawable/ic_search_dark.xml" value="0.1203125" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/activity_drug.xml" value="0.431924882629108" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/activity_drug_store.xml" value="0.13125" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/activity_splash_screen.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/drug_dialog.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/drug_store_dialog.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/item_drug.xml" value="0.4" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/item_drugstore.xml" value="0.4" />
+        <entry key="..\:/Users/n18dccn092/AndroidStudioProjects/DrugStoreManagement/app/src/main/res/layout/progress_dialog.xml" value="0.25416666666666665" />
+=======
         <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/activity_statistic.xml" value="0.33" />
         <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/child_item.xml" value="0.29322916666666665" />
         <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/drug_dialog.xml" value="0.25416666666666665" />
@@ -49,6 +66,7 @@
         <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/progress_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/spinner_dropdown_item.xml" value="0.29322916666666665" />
         <entry key="..\:/Users/MyPC/Desktop/Project/Android/DrugStoreManagement/app/src/main/res/layout/spinner_item.xml" value="0.215625" />
+>>>>>>> 9bf273bc4b9b04006c2c92163250badc5389eeeb
       </map>
     </option>
   </component>
