@@ -21,4 +21,8 @@
     <color name="transparent">#0000FFFF</color>
 
     <color name="black_effective">#2a2a2a</color>
+
+
+
+    <color name="normal_text">#252525</color>
 </resources>

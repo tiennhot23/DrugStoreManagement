@@ -4,12 +4,14 @@
 
     <string name="something_wrong">Có lỗi xảy ra</string>
     <string name="drugstore">Nhà thuốc</string>
-    <string name="drug">Tên thuốc:</string>
+    <string name="drug">Thuốc</string>
+    <string name="bill">Hóa đơn</string>
+    <string name="statistic">Thống kê</string>
+    <string name="drug_">Tên thuốc:</string>
     <string name="address">Địa chỉ</string>
     <string name="drugstore_">Nhà thuốc:</string>
     <string name="address_">Địa chỉ: </string>
     <string name="save">Lưu</string>
-    <string name="unit">Đơn vị:</string>
 
 
     <!-- operation -->
@@ -21,11 +23,24 @@
     <string name="empty_address">Địa chỉ không được bỏ trống</string>
     <string name="empty_price">Giá tiền không được bỏ trống</string>
     <string name="empty_amount">Số lượng không được bỏ trống</string>
-  
-  
+
+
     <!-- message -->
     <string name="amount_">Số lượng:</string>
-    <string name="unit_">Đơn vị tính:</string>
+    <string name="unit_">Đơn vị:</string>
     <string name="price">Giá:</string>
-    <string name="statistic">Thống kê</string>
+    <string name="add_success">Thêm thành công</string>
+    <string name="title_activity_content">ContentActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

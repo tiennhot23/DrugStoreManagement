@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group>
+        <item android:id="@+id/drug_page"
+            android:title="@string/drug"
+            android:icon="@drawable/ic_drug">
+        </item>
+        <item android:id="@+id/drugstore_page"
+            android:title="@string/drugstore"
+            android:icon="@drawable/ic_drugstore">
+        </item>
+        <item android:id="@+id/bill_page"
+            android:title="@string/bill"
+            android:icon="@drawable/ic_bill">
+        </item>
+        <item android:id="@+id/statistic_page"
+            android:title="@string/statistic"
+            android:icon="@drawable/ic_chart">
+        </item>
+    </group>
+</menu>

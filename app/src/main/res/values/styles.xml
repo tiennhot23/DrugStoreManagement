@@ -8,10 +8,15 @@
         <item name="android:ellipsize">end</item>
         <item name="android:textColor">@color/dark_text</item>
         <item name="android:textCursorDrawable">@drawable/cursor_edittext</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">@dimen/text_normal</item>
     </style>
 
     <style name="MyButton" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@color/light_text</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ZoomAnimation">
@@ -21,5 +26,34 @@
     <style name="ActivityAnimation">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+
+    <style name="NormalText" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:textColor">@color/normal_text</item>
+        <item name="android:padding">5dp</item>
+    </style>
+    <style name="TitleText" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/light_text</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="MySpinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:padding">10dp</item>
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="android:background">@null</item>
+        <item name="android:popupElevation">1dp</item>
+        <item name="android:popupAnimationStyle">@style/ZoomAnimation</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+    </style>
+    
+    <style name="MySearchBox" parent="CardView">
+        <item name="cardBackgroundColor">@color/light_card</item>
+        <item name="cardCornerRadius">28dp</item>
+        <item name="contentPadding">10dp</item>
     </style>
 </resources>

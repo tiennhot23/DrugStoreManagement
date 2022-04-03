@@ -1,18 +1,15 @@
 package com.example.drugstoremanagement.ui.main;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import androidx.cardview.widget.CardView;
 import com.example.drugstoremanagement.R;
 import com.example.drugstoremanagement.ui.base.BaseActivity;
-import com.example.drugstoremanagement.ui.drug.DrugActivity;
-import com.example.drugstoremanagement.ui.drugstore.DrugStoreActivity;
-import com.example.drugstoremanagement.ui.statistic.StatisticActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -61,22 +58,31 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         search = findViewById(R.id.search);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.card_drug:
-                startActivity(new Intent(this, DrugActivity.class));
+            case R.id.search:
+                intent = new Intent(this, ContentActivity.class);
+                intent.putExtra("currentFragment", CurrentFragment.DRUG);
+                startActivity(intent);
                 break;
             case R.id.card_drugstore:
-                startActivity(new Intent(this, DrugStoreActivity.class));
+                intent = new Intent(this, ContentActivity.class);
+                intent.putExtra("currentFragment", CurrentFragment.DRUGSTORE);
+                startActivity(intent);
                 break;
             case R.id.card_bill:
+                intent = new Intent(this, ContentActivity.class);
+                intent.putExtra("currentFragment", CurrentFragment.BILL);
+                startActivity(intent);
                 break;
             case R.id.card_statistic:
-                startActivity(new Intent(this, StatisticActivity.class));
-                break;
-            case R.id.search:
-                startActivity(new Intent(this, DrugActivity.class));
+                intent = new Intent(this, ContentActivity.class);
+                intent.putExtra("currentFragment", CurrentFragment.STATISTIC);
+                startActivity(intent);
                 break;
             default:
                 break;

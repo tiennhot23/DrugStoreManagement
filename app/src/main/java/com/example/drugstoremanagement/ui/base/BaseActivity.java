@@ -1,6 +1,7 @@
 package com.example.drugstoremanagement.ui.base;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -12,7 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.drugstoremanagement.R;
+import com.example.drugstoremanagement.ui.messagedialog.MessageDialog;
 import com.google.android.material.snackbar.Snackbar;
 
 
@@ -32,6 +35,11 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .findViewById(R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, R.color.white));
         snackbar.show();
+    }
+
+    private void showPopup(String message, int animation) {
+        MessageDialog messageDialog = new MessageDialog(this);
+        messageDialog.showMessage(message, animation);
     }
 
 
@@ -76,6 +84,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showMessage(int resId) {
         showMessage(getString(resId));
+    }
+
+    public void showPopupMessage(String message, int animation) {
+        showPopup(message, animation);
+    }
+
+    public void showPopupMessage(int resId, int animation) {
+        showPopupMessage(getString(resId), animation);
     }
 
     protected abstract void setup();

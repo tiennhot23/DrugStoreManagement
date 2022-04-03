@@ -8,10 +8,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DrugStoreManagement">
-
         <activity
-            android:name=".ui.statistic.StatisticActivity"
-            android:exported="true" />
+            android:name=".ui.main.ContentActivity"
+            android:exported="true"
+            android:label="@string/title_activity_content"
+            android:theme="@style/Theme.DrugStoreManagement.NoActionBar" />
         <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="true">
@@ -23,15 +24,6 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.drugstore.DrugStoreActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.bill.BillActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.drug.DrugActivity"
             android:exported="true" />
     </application>
 
