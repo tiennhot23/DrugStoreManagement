@@ -45,9 +45,10 @@
             android:id="@+id/history_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
             app:flChildSpacingForLastRow="align"
-            app:flMaxRows="3"
+            app:flMaxRows="2"
             app:flRowSpacing="8dp">
 
         </com.nex3z.flowlayout.FlowLayout>

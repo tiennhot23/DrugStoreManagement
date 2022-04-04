@@ -1,6 +1,7 @@
 package com.example.drugstoremanagement.ui.drug;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +19,7 @@ import com.example.drugstoremanagement.R;
 import com.example.drugstoremanagement.RecyclerListener;
 import com.example.drugstoremanagement.data.DataManager;
 import com.example.drugstoremanagement.data.db.model.Drug;
+import com.example.drugstoremanagement.data.db.model.HistorySearchDrug;
 import com.example.drugstoremanagement.ui.base.BaseFragment;
 import com.nex3z.flowlayout.FlowLayout;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +31,7 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
 
     private EditText txtSearch;
     private ImageView btn_search, btn_add;
-    private FlowLayout historySearch;
+    private FlowLayout historySearchLayout;
     private RecyclerView recyclerViewDrug;
     private List<Drug> listDrug = new ArrayList<>();
     private DrugDialog drugDialog;
@@ -53,6 +57,36 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
         LayoutAnimationController layoutAnimationController = AnimationUtils.loadLayoutAnimation(getContext(),R.anim.layout_animation_left_to_right);
         recyclerViewDrug.setLayoutAnimation(layoutAnimationController);
         recyclerViewDrug.setAdapter(new DrugAdapter(getContext(), this, listDrug));
+
+        loadHistorySearch();
+
+    }
+
+    private void loadHistorySearch() {
+        DataManager.getInstance(getContext()).getHistorySearchDrug().observe(this, historySearches -> {
+            if(historySearches.size() > 10){
+                DataManager.getInstance(getContext()).deleteHistorySearchDrug(historySearches.get(0));
+            }
+            historySearchLayout.removeAllViews();
+            for(int i=0; i<historySearches.size(); i++) {
+                TextView textView = new TextView(getContext());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(10,10,10,10);
+                textView.setId(i);
+                textView.setLayoutParams(params);
+                textView.setBackground(getResources().getDrawable(R.drawable.search_item));
+                textView.getBackground().setAlpha(200);
+                textView.setPadding(20,10,20,10);
+                textView.setText(historySearches.get(i).getSearch());
+                textView.setTextColor(Color.WHITE);
+                historySearchLayout.addView(textView, 0);
+
+                textView.setOnClickListener(v -> {
+                    txtSearch.setText(textView.getText());
+                    searchDrug(textView.getText().toString());
+                });
+            }
+        });
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -71,7 +105,7 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
         txtSearch = view.findViewById(R.id.edt_search);
         btn_search = view.findViewById(R.id.btn_search);
         btn_add = view.findViewById(R.id.btn_add);
-        historySearch = view.findViewById(R.id.history_layout);
+        historySearchLayout = view.findViewById(R.id.history_layout);
         recyclerViewDrug = view.findViewById(R.id.recycleViewDrug);
     }
 
@@ -83,6 +117,9 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
                 addDrug();
                 break;
             case R.id.btn_search:
+                String title = txtSearch.getText().toString().trim();
+                if(!title.equals(""))
+                    DataManager.getInstance(getContext()).insertHistorySearchDrug(new HistorySearchDrug(title));
                 searchDrug(txtSearch.getText().toString().trim());
                 break;
             default:
@@ -100,13 +137,13 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void success() {
-        showMessage(R.string.save_success);
+        showPopupMessage(R.string.save_success, R.raw.success);
         if (recyclerViewDrug.getAdapter() != null) recyclerViewDrug.getAdapter().notifyDataSetChanged();
     }
 
     @Override
     public void fail() {
-        showMessage(R.string.save_fail);
+        showPopupMessage(R.string.save_fail, R.raw.error);
         if (listDrug != null && listDrug.size() > 0) {
             listDrug.remove(listDrug.size() - 1);
         }

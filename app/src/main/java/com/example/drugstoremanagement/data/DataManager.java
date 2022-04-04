@@ -6,7 +6,8 @@ import com.example.drugstoremanagement.data.db.DBHelper;
 import com.example.drugstoremanagement.data.db.model.Drug;
 import com.example.drugstoremanagement.data.db.model.Bill;
 import com.example.drugstoremanagement.data.db.model.DrugStore;
-import com.example.drugstoremanagement.data.db.model.HistorySearch;
+import com.example.drugstoremanagement.data.db.model.HistorySearchDrug;
+import com.example.drugstoremanagement.data.db.model.HistorySearchDrugstore;
 
 import java.util.List;
 
@@ -25,17 +26,31 @@ public class DataManager {
         return instance;
     }
 
-    public LiveData<List<HistorySearch>> getHistorySearch() {
-        return dbHelper.getHistorySearch();
+    public LiveData<List<HistorySearchDrug>> getHistorySearchDrug() {
+        return dbHelper.getHistorySearchDrug();
     }
 
-    public void insertHistorySearch(HistorySearch historySearch) {
-        dbHelper.insertHistorySearch(historySearch);
+    public void insertHistorySearchDrug(HistorySearchDrug historySearchDrug) {
+        dbHelper.insertHistorySearchDrug(historySearchDrug);
     }
 
-    public void deleteHistorySearch(HistorySearch historySearch) {
-        dbHelper.deleteHistorySearch(historySearch);
+    public void deleteHistorySearchDrug(HistorySearchDrug historySearchDrug) {
+        dbHelper.deleteHistorySearchDrug(historySearchDrug);
     }
+
+    public LiveData<List<HistorySearchDrugstore>> getHistorySearchDrugstore() {
+        return dbHelper.getHistorySearchDrugstore();
+    }
+
+    public void insertHistorySearchDrugstore(HistorySearchDrugstore historySearchDrugstore) {
+        dbHelper.insertHistorySearchDrugstore(historySearchDrugstore);
+    }
+
+    public void deleteHistorySearchDrugstore(HistorySearchDrugstore historySearchDrugstore) {
+        dbHelper.deleteHistorySearchDrugstore(historySearchDrugstore);
+    }
+
+
 
     public List<DrugStore> getDrugStore() {return dbHelper.getDrugStore();}
 

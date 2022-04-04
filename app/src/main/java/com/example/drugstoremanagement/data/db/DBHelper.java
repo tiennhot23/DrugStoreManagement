@@ -5,17 +5,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+import android.database.sqlite.SQLiteException;
 import androidx.lifecycle.LiveData;
 import com.example.drugstoremanagement.data.db.model.Drug;
 import androidx.lifecycle.MutableLiveData;
 import com.example.drugstoremanagement.data.db.model.Bill;
 import com.example.drugstoremanagement.data.db.model.DrugStore;
-import com.example.drugstoremanagement.data.db.model.HistorySearch;
+import com.example.drugstoremanagement.data.db.model.HistorySearchDrug;
+import com.example.drugstoremanagement.data.db.model.HistorySearchDrugstore;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.*;
 
 public class DBHelper {
 
@@ -26,15 +26,15 @@ public class DBHelper {
     }
 
     @SuppressLint("Recycle")
-    public LiveData<List<HistorySearch>> getHistorySearch() {
-        MutableLiveData<List<HistorySearch>> liveData = new MutableLiveData<>();
-        List<HistorySearch> data = new ArrayList<>();
+    public LiveData<List<HistorySearchDrug>> getHistorySearchDrug() {
+        MutableLiveData<List<HistorySearchDrug>> liveData = new MutableLiveData<>();
+        List<HistorySearchDrug> data = new ArrayList<>();
         SQLiteDatabase db = appDatabase.getReadableDatabase();
-        String query = "select * from HistorySearch";
+        String query = "select * from HistorySearchDrug";
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()) {
-            HistorySearch historySearch = new HistorySearch(cursor.getString(0));
+            HistorySearchDrug historySearch = new HistorySearchDrug(cursor.getString(0));
             data.add(historySearch);
             cursor.moveToNext();
         }
@@ -43,12 +43,54 @@ public class DBHelper {
         return liveData;
     }
 
-    public void insertHistorySearch(HistorySearch historySearch) {
-
+    public int insertHistorySearchDrug(HistorySearchDrug historySearchDrug) {
+        try {
+            SQLiteDatabase db = appDatabase.getWritableDatabase();
+            String query = "insert or ignore into HistorySearchDrug (search) values(?)";
+            db.execSQL(query, new String[]{historySearchDrug.getSearch()});
+            return 1;
+        } catch (SQLiteException e) {
+            return -1;
+        }
     }
 
-    public void deleteHistorySearch(HistorySearch historySearch) {
+    public int deleteHistorySearchDrug(HistorySearchDrug historySearchDrug) {
+        SQLiteDatabase db = appDatabase.getWritableDatabase();
+        return db.delete("HistorySearchDrug","search = ?", new String[]{historySearchDrug.getSearch()});
+    }
 
+    @SuppressLint("Recycle")
+    public LiveData<List<HistorySearchDrugstore>> getHistorySearchDrugstore() {
+        MutableLiveData<List<HistorySearchDrugstore>> liveData = new MutableLiveData<>();
+        List<HistorySearchDrugstore> data = new ArrayList<>();
+        SQLiteDatabase db = appDatabase.getReadableDatabase();
+        String query = "select * from HistorySearchDrugstore";
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            HistorySearchDrugstore historySearch = new HistorySearchDrugstore(cursor.getString(0));
+            data.add(historySearch);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        liveData.postValue(data);
+        return liveData;
+    }
+
+    public int insertHistorySearchDrugstore(HistorySearchDrugstore historySearchDrugstore) {
+        try {
+            SQLiteDatabase db = appDatabase.getWritableDatabase();
+            String query = "insert or ignore into HistorySearchDrugstore (search) values(?)";
+            db.execSQL(query, new String[]{historySearchDrugstore.getSearch()});
+            return 1;
+        } catch (SQLiteException e) {
+            return -1;
+        }
+    }
+
+    public int deleteHistorySearchDrugstore(HistorySearchDrugstore historySearchDrugstore) {
+        SQLiteDatabase db = appDatabase.getWritableDatabase();
+        return db.delete("HistorySearchDrugstore","search = ?", new String[]{historySearchDrugstore.getSearch()});
     }
 
 
