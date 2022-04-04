@@ -24,6 +24,7 @@ import com.example.drugstoremanagement.data.db.model.DrugStore;
 import com.example.drugstoremanagement.data.db.model.HistorySearchDrug;
 import com.example.drugstoremanagement.data.db.model.HistorySearchDrugstore;
 import com.example.drugstoremanagement.data.viewmodel.DrugStoreViewModel;
+import com.example.drugstoremanagement.data.viewmodel.HistorySearchDrugstoreViewModel;
 import com.example.drugstoremanagement.ui.base.BaseFragment;
 import com.nex3z.flowlayout.FlowLayout;
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +43,7 @@ public class DrugStoreFragment extends BaseFragment implements View.OnClickListe
     private List<DrugStore> drugStores = new ArrayList<>();
 
     private DrugStoreViewModel drugStoreViewModel;
+    private HistorySearchDrugstoreViewModel historySearchDrugstoreViewModel;
 
     public DrugStoreFragment() {
 
@@ -60,7 +62,6 @@ public class DrugStoreFragment extends BaseFragment implements View.OnClickListe
         drugStoreViewModel.getDrugstores().observe(getViewLifecycleOwner(), this::setDrugStores);
         btnAdd.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
-//        drugStores = DataManager.getInstance(getContext()).getDrugStore();
         LayoutAnimationController layoutAnimationController = AnimationUtils.loadLayoutAnimation(getContext(),R.anim.layout_animation_left_to_right);
         recycler.setLayoutAnimation(layoutAnimationController);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -71,9 +72,10 @@ public class DrugStoreFragment extends BaseFragment implements View.OnClickListe
     }
 
     private void loadHistorySearch() {
-        DataManager.getInstance(getContext()).getHistorySearchDrugstore().observe(this, historySearches -> {
+        historySearchDrugstoreViewModel = ViewModelProviders.of(getBaseActivity(), new HistorySearchDrugstoreViewModel.Factory(getContext())).get(HistorySearchDrugstoreViewModel.class);
+        historySearchDrugstoreViewModel.getHistorySearchDrugstores().observe(getViewLifecycleOwner(), historySearches -> {
             if(historySearches.size() > 10){
-                DataManager.getInstance(getContext()).deleteHistorySearchDrugstore(historySearches.get(0));
+                historySearchDrugstoreViewModel.deleteHistorySearchDrugstore(historySearches.get(0));
             }
             historySearchLayout.removeAllViews();
             for(int i=0; i<historySearches.size(); i++) {
@@ -124,7 +126,7 @@ public class DrugStoreFragment extends BaseFragment implements View.OnClickListe
             case R.id.btn_search:
                 String title = edtSearch.getText().toString().trim();
                 if(!title.equals(""))
-                    DataManager.getInstance(getContext()).insertHistorySearchDrugstore(new HistorySearchDrugstore(title));
+                    historySearchDrugstoreViewModel.insertHistorySearchDrugstore(new HistorySearchDrugstore(title));
                 search(edtSearch.getText().toString().trim());
                 break;
             default:

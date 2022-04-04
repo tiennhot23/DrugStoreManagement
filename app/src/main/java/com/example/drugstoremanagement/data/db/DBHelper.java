@@ -26,8 +26,7 @@ public class DBHelper {
     }
 
     @SuppressLint("Recycle")
-    public LiveData<List<HistorySearchDrug>> getHistorySearchDrug() {
-        MutableLiveData<List<HistorySearchDrug>> liveData = new MutableLiveData<>();
+    public List<HistorySearchDrug> getHistorySearchDrug() {
         List<HistorySearchDrug> data = new ArrayList<>();
         SQLiteDatabase db = appDatabase.getReadableDatabase();
         String query = "select * from HistorySearchDrug";
@@ -39,8 +38,7 @@ public class DBHelper {
             cursor.moveToNext();
         }
         cursor.close();
-        liveData.postValue(data);
-        return liveData;
+        return data;
     }
 
     public int insertHistorySearchDrug(HistorySearchDrug historySearchDrug) {
@@ -60,8 +58,7 @@ public class DBHelper {
     }
 
     @SuppressLint("Recycle")
-    public LiveData<List<HistorySearchDrugstore>> getHistorySearchDrugstore() {
-        MutableLiveData<List<HistorySearchDrugstore>> liveData = new MutableLiveData<>();
+    public List<HistorySearchDrugstore> getHistorySearchDrugstore() {
         List<HistorySearchDrugstore> data = new ArrayList<>();
         SQLiteDatabase db = appDatabase.getReadableDatabase();
         String query = "select * from HistorySearchDrugstore";
@@ -73,8 +70,7 @@ public class DBHelper {
             cursor.moveToNext();
         }
         cursor.close();
-        liveData.postValue(data);
-        return liveData;
+        return data;
     }
 
     public int insertHistorySearchDrugstore(HistorySearchDrugstore historySearchDrugstore) {

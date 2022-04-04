@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.drugstoremanagement.R;
@@ -20,6 +21,8 @@ import com.example.drugstoremanagement.RecyclerListener;
 import com.example.drugstoremanagement.data.DataManager;
 import com.example.drugstoremanagement.data.db.model.Drug;
 import com.example.drugstoremanagement.data.db.model.HistorySearchDrug;
+import com.example.drugstoremanagement.data.viewmodel.HistorySearchDrugViewModel;
+import com.example.drugstoremanagement.data.viewmodel.HistorySearchDrugstoreViewModel;
 import com.example.drugstoremanagement.ui.base.BaseFragment;
 import com.nex3z.flowlayout.FlowLayout;
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +38,8 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
     private RecyclerView recyclerViewDrug;
     private List<Drug> listDrug = new ArrayList<>();
     private DrugDialog drugDialog;
+
+    private HistorySearchDrugViewModel historySearchDrugViewModel;
 
     public DrugFragment() {
 
@@ -63,9 +68,10 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
     }
 
     private void loadHistorySearch() {
-        DataManager.getInstance(getContext()).getHistorySearchDrug().observe(this, historySearches -> {
+        historySearchDrugViewModel = ViewModelProviders.of(getBaseActivity(), new HistorySearchDrugViewModel.Factory(getContext())).get(HistorySearchDrugViewModel.class);
+        historySearchDrugViewModel.getHistorySearchDrugs().observe(this, historySearches -> {
             if(historySearches.size() > 10){
-                DataManager.getInstance(getContext()).deleteHistorySearchDrug(historySearches.get(0));
+                historySearchDrugViewModel.deleteHistorySearchDrug(historySearches.get(0));
             }
             historySearchLayout.removeAllViews();
             for(int i=0; i<historySearches.size(); i++) {
@@ -119,7 +125,7 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
             case R.id.btn_search:
                 String title = txtSearch.getText().toString().trim();
                 if(!title.equals(""))
-                    DataManager.getInstance(getContext()).insertHistorySearchDrug(new HistorySearchDrug(title));
+                    historySearchDrugViewModel.insertHistorySearchDrug(new HistorySearchDrug(title));
                 searchDrug(txtSearch.getText().toString().trim());
                 break;
             default:

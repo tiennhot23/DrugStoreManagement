@@ -26,28 +26,28 @@ public class DataManager {
         return instance;
     }
 
-    public LiveData<List<HistorySearchDrug>> getHistorySearchDrug() {
+    public List<HistorySearchDrug> getHistorySearchDrug() {
         return dbHelper.getHistorySearchDrug();
     }
 
-    public void insertHistorySearchDrug(HistorySearchDrug historySearchDrug) {
-        dbHelper.insertHistorySearchDrug(historySearchDrug);
+    public boolean insertHistorySearchDrug(HistorySearchDrug historySearchDrug) {
+        return dbHelper.insertHistorySearchDrug(historySearchDrug) >= 0;
     }
 
-    public void deleteHistorySearchDrug(HistorySearchDrug historySearchDrug) {
-        dbHelper.deleteHistorySearchDrug(historySearchDrug);
+    public boolean deleteHistorySearchDrug(HistorySearchDrug historySearchDrug) {
+        return dbHelper.deleteHistorySearchDrug(historySearchDrug) >= 0;
     }
 
-    public LiveData<List<HistorySearchDrugstore>> getHistorySearchDrugstore() {
+    public List<HistorySearchDrugstore> getHistorySearchDrugstore() {
         return dbHelper.getHistorySearchDrugstore();
     }
 
-    public void insertHistorySearchDrugstore(HistorySearchDrugstore historySearchDrugstore) {
-        dbHelper.insertHistorySearchDrugstore(historySearchDrugstore);
+    public boolean insertHistorySearchDrugstore(HistorySearchDrugstore historySearchDrugstore) {
+        return dbHelper.insertHistorySearchDrugstore(historySearchDrugstore) >= 0;
     }
 
-    public void deleteHistorySearchDrugstore(HistorySearchDrugstore historySearchDrugstore) {
-        dbHelper.deleteHistorySearchDrugstore(historySearchDrugstore);
+    public boolean deleteHistorySearchDrugstore(HistorySearchDrugstore historySearchDrugstore) {
+        return dbHelper.deleteHistorySearchDrugstore(historySearchDrugstore) >= 0;
     }
 
 
