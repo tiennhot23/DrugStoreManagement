@@ -9,8 +9,7 @@
         android:id="@+id/txt_bill_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_normal"
-        android:textColor="@color/dark_text"
+        style="@style/NormalText"
         android:text="HD001"
         android:maxLines="1"
         android:ellipsize="end"
@@ -30,8 +29,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="12000"
-        android:textColor="@color/dark_text"
-        android:textSize="@dimen/text_normal"
+        style="@style/NormalText"
         tools:ignore="HardcodedText" />
     <TextView
         android:id="@+id/vnd"
@@ -44,7 +42,6 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="VND"
-        android:textColor="@color/dark_text"
-        android:textSize="@dimen/text_normal"
+        style="@style/NormalText"
         tools:ignore="HardcodedText" />
 </RelativeLayout>

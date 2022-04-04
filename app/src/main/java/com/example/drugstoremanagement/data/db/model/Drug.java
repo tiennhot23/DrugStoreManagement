@@ -16,6 +16,14 @@ public class Drug {
         this.price = price;
     }
 
+    public Drug(Drug drug) {
+        this.drugID = drug.getDrugID();
+        this.drugName = drug.getDrugName();
+        this.unit = drug.getUnit();
+        this.amount = drug.getAmount();
+        this.price = drug.getPrice();
+    }
+
     public Drug(){
     }
 

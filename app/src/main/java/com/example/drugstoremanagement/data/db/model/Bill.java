@@ -5,14 +5,14 @@ import java.util.List;
 public class Bill {
     private String billID;
     private String date;
-    private String drugStoreID;
+    private DrugStore drugStore;
     private List<Drug> drugs;
     private long total;
 
-    public Bill(String billID, String date, String drugStoreID, List<Drug> drugs) {
+    public Bill(String billID, String date, DrugStore drugStore, List<Drug> drugs) {
         this.billID = billID;
         this.date = date;
-        this.drugStoreID = drugStoreID;
+        this.drugStore = drugStore;
         this.drugs = drugs;
     }
 
@@ -23,6 +23,12 @@ public class Bill {
         this.billID = billID;
         this.date = date;
         this.total = total;
+    }
+
+    public Bill(String billID, DrugStore drugStore, String date){
+        this.billID = billID;
+        this.date = date;
+        this.drugStore = drugStore;
     }
 
     public String getBillID() {
@@ -41,12 +47,12 @@ public class Bill {
         this.date = date;
     }
 
-    public String getDrugStoreID() {
-        return drugStoreID;
+    public DrugStore getDrugStoreID() {
+        return drugStore;
     }
 
-    public void setDrugStoreID(String drugStoreID) {
-        this.drugStoreID = drugStoreID;
+    public void setDrugStoreID(DrugStore drugStore) {
+        this.drugStore = drugStore;
     }
 
     public List<Drug> getDrugs() {
