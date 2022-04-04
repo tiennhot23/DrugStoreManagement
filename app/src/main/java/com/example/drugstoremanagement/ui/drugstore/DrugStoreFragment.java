@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.drugstoremanagement.R;
@@ -21,10 +23,12 @@ import com.example.drugstoremanagement.data.DataManager;
 import com.example.drugstoremanagement.data.db.model.DrugStore;
 import com.example.drugstoremanagement.data.db.model.HistorySearchDrug;
 import com.example.drugstoremanagement.data.db.model.HistorySearchDrugstore;
+import com.example.drugstoremanagement.data.viewmodel.DrugStoreViewModel;
 import com.example.drugstoremanagement.ui.base.BaseFragment;
 import com.nex3z.flowlayout.FlowLayout;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DrugStoreFragment extends BaseFragment implements View.OnClickListener, DrugStoreDialog.Callback, RecyclerListener {
@@ -35,7 +39,9 @@ public class DrugStoreFragment extends BaseFragment implements View.OnClickListe
     private ImageView btnAdd, btnSearch;
     private DrugStoreDialog dialogDrugStore;
 
-    private List<DrugStore> drugStores;
+    private List<DrugStore> drugStores = new ArrayList<>();
+
+    private DrugStoreViewModel drugStoreViewModel;
 
     public DrugStoreFragment() {
 
@@ -50,9 +56,11 @@ public class DrugStoreFragment extends BaseFragment implements View.OnClickListe
     @Override
     protected void setup(View view) {
         setupView(view);
+        drugStoreViewModel = ViewModelProviders.of(getBaseActivity(), new DrugStoreViewModel.Factory(getContext())).get(DrugStoreViewModel.class);
+        drugStoreViewModel.getDrugstores().observe(getViewLifecycleOwner(), this::setDrugStores);
         btnAdd.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
-        drugStores = DataManager.getInstance(getContext()).getDrugStore();
+//        drugStores = DataManager.getInstance(getContext()).getDrugStore();
         LayoutAnimationController layoutAnimationController = AnimationUtils.loadLayoutAnimation(getContext(),R.anim.layout_animation_left_to_right);
         recycler.setLayoutAnimation(layoutAnimationController);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -124,31 +132,36 @@ public class DrugStoreFragment extends BaseFragment implements View.OnClickListe
         }
     }
 
+    @Override
+    public void onItemClick(int position) {
+        DrugStore drugStore = new DrugStore(drugStores.get(position));
+        dialogDrugStore = new DrugStoreDialog(getContext(), drugStoreViewModel,this, drugStore);
+        dialogDrugStore.show();
+    }
+
     private void addDrugStore() {
         DrugStore drugStore = new DrugStore();
-        drugStores.add(drugStore);
-        dialogDrugStore = new DrugStoreDialog(getContext(), this, drugStore);
+        dialogDrugStore = new DrugStoreDialog(getContext(), drugStoreViewModel, this, drugStore);
         dialogDrugStore.show();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private void setDrugStores(List<DrugStore> drugStores) {
+        this.drugStores.clear();
+        this.drugStores.addAll(drugStores);
+        if (recycler.getAdapter() != null) recycler.getAdapter().notifyDataSetChanged();
     }
 
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void success() {
         showPopupMessage(R.string.save_success, R.raw.success);
-        if (recycler.getAdapter() != null) recycler.getAdapter().notifyDataSetChanged();
     }
 
     @Override
     public void fail() {
         showPopupMessage(R.string.save_fail, R.raw.error);
-        if (drugStores != null && drugStores.size() > 0) {
-            drugStores.remove(drugStores.size() - 1);
-        }
     }
 
-    @Override
-    public void onItemClick(int position) {
-        dialogDrugStore = new DrugStoreDialog(getContext(), this, drugStores.get(position));
-        dialogDrugStore.show();
-    }
+
 }

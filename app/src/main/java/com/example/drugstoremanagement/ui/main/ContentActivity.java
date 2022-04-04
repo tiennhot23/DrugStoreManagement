@@ -18,6 +18,9 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ContentActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static CurrentFragment currentFragment = CurrentFragment.DRUG;
@@ -25,6 +28,8 @@ public class ContentActivity extends BaseActivity implements NavigationView.OnNa
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Toolbar toolbar;
+
+    Fragment[] fragments = new Fragment[] {new DrugFragment(), new DrugStoreFragment(), new BillFragment(), new StatisticFragment()};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +43,16 @@ public class ContentActivity extends BaseActivity implements NavigationView.OnNa
     protected void setup() {
         bindView();
         currentFragment = (CurrentFragment) getIntent().getSerializableExtra("currentFragment");
-        toolbar.setTitle(currentFragment == CurrentFragment.DRUG ? R.string.drug :
-                currentFragment == CurrentFragment.DRUGSTORE ? R.string.drugstore :
-                        currentFragment == CurrentFragment.BILL ? R.string.bill : R.string.statistic);
+        loadFragment();
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_menu);
         toolbar.setNavigationOnClickListener(v -> {
             openNavigationDrawer();
         });
 
-
         navigationView.setNavigationItemSelectedListener(this);
 
-        replaceFragment(currentFragment == CurrentFragment.DRUG ? new DrugFragment() :
-                currentFragment == CurrentFragment.DRUGSTORE ? new DrugStoreFragment() :
-                        currentFragment == CurrentFragment.BILL ? new BillFragment() : new StatisticFragment());
+
     }
 
     private void bindView() {
@@ -75,38 +75,28 @@ public class ContentActivity extends BaseActivity implements NavigationView.OnNa
             case R.id.drug_page:
                 if (currentFragment != CurrentFragment.DRUG) {
                     currentFragment = CurrentFragment.DRUG;
-                    replaceFragment(new DrugFragment());
-                    toolbar.setTitle(R.string.drug);
                 }
-                closeNavigationDrawer();
-                return true;
+                break;
             case R.id.drugstore_page:
                 if (currentFragment != CurrentFragment.DRUGSTORE) {
                     currentFragment = CurrentFragment.DRUGSTORE;
-                    replaceFragment(new DrugStoreFragment());
-                    toolbar.setTitle(R.string.drugstore);
                 }
-                closeNavigationDrawer();
-                return true;
+                break;
             case R.id.bill_page:
                 if (currentFragment != CurrentFragment.BILL) {
                     currentFragment = CurrentFragment.BILL;
-                    replaceFragment(new BillFragment());
-                    toolbar.setTitle(R.string.bill);
                 }
-                closeNavigationDrawer();
-                return true;
+                break;
             case R.id.statistic_page:
                 if (currentFragment != CurrentFragment.STATISTIC) {
                     currentFragment = CurrentFragment.STATISTIC;
-                    replaceFragment(new StatisticFragment());
-                    toolbar.setTitle(R.string.statistic);
                 }
-                closeNavigationDrawer();
-                return true;
-            default:
-                return false;
+                break;
+            default: return false;
         }
+        loadFragment();
+        closeNavigationDrawer();
+        return true;
     }
 
     public void openNavigationDrawer() {
@@ -118,9 +108,10 @@ public class ContentActivity extends BaseActivity implements NavigationView.OnNa
             drawerLayout.close();
     }
 
-    private void replaceFragment(Fragment fragment) {
+    private void loadFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.content_frame, fragment);
+        fragmentTransaction.replace(R.id.content_frame, fragments[currentFragment.position]);
         fragmentTransaction.commit();
+        toolbar.setTitle(currentFragment.labelID);
     }
 }

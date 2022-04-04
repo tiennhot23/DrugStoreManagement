@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import com.example.drugstoremanagement.R;
 import com.example.drugstoremanagement.data.DataManager;
 import com.example.drugstoremanagement.data.db.model.DrugStore;
+import com.example.drugstoremanagement.data.viewmodel.DrugStoreViewModel;
 import com.example.drugstoremanagement.ui.base.BaseActivity;
 import com.example.drugstoremanagement.ui.base.BaseDialog;
 import com.google.android.material.snackbar.Snackbar;
@@ -25,6 +26,7 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
     private DrugStore drugStore;
     private Context context;
     private Callback callback;
+    private DrugStoreViewModel drugStoreViewModel;
 
     private EditText edtDrugStoreName, edtAddress;
     private Spinner spinner;
@@ -36,11 +38,12 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
         void fail();
     }
 
-    public DrugStoreDialog(@NonNull Context context, Callback callback, DrugStore drugStore) {
+    public DrugStoreDialog(@NonNull Context context, DrugStoreViewModel drugStoreViewModel, Callback callback, DrugStore drugStore) {
         super(context);
         this.context = context;
         this.drugStore = drugStore;
         this.callback = callback;
+        this.drugStoreViewModel = drugStoreViewModel;
     }
 
     @Override
@@ -87,7 +90,7 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
                     drugStore.setDrugStoreID(generateDrugStoreID());
                     drugStore.setDrugStoreName(edtDrugStoreName.getText().toString().trim());
                     drugStore.setAddress(edtAddress.getText().toString().trim());
-                    if (DataManager.getInstance(context).insertDrugStore(drugStore)) {
+                    if (drugStoreViewModel.insertDrugstore(drugStore)) {
                         callback.success();
                     } else {
                         callback.fail();
@@ -103,8 +106,10 @@ public class DrugStoreDialog extends BaseDialog implements View.OnClickListener 
                     }
                     drugStore.setDrugStoreName(edtDrugStoreName.getText().toString().trim());
                     drugStore.setAddress(edtAddress.getText().toString().trim());
-                    if (DataManager.getInstance(context).updateDrugStore(drugStore)) {
+                    if (drugStoreViewModel.updateDrugstore(drugStore)) {
                         callback.success();
+                    } else {
+                        callback.fail();
                     }
                     dismiss();
                 }

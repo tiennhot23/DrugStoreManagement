@@ -12,6 +12,12 @@ public class DrugStore {
         this.address = address;
     }
 
+    public DrugStore(DrugStore drugStore) {
+        this.drugStoreID = drugStore.getDrugStoreID();
+        this.drugStoreName = drugStore.getDrugStoreName();
+        this.address = drugStore.getAddress();
+    }
+
     public DrugStore(){
     }
 
