@@ -1,15 +1,27 @@
 package com.example.drugstoremanagement.ui.bill;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
+import android.graphics.*;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.*;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import com.example.drugstoremanagement.R;
 import com.example.drugstoremanagement.data.DataManager;
+import com.example.drugstoremanagement.data.db.model.Bill;
 import com.example.drugstoremanagement.data.db.model.Drug;
 import com.example.drugstoremanagement.data.db.model.DrugStore;
 import com.example.drugstoremanagement.data.viewmodel.DrugStoreViewModel;
@@ -18,10 +30,14 @@ import com.example.drugstoremanagement.ui.base.BaseFragment;
 import com.example.drugstoremanagement.ui.statistic.DrugStoreNameAdapter;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class BillFragment extends BaseFragment implements DrugInBillDialog.Callback{
 
@@ -62,11 +78,7 @@ public class BillFragment extends BaseFragment implements DrugInBillDialog.Callb
 
         detailBillAdapter = new DetailBillAdapter(getContext(), R.layout.item_detail_bill, drugsSelected);
         listItem.setAdapter(detailBillAdapter);
-        drugViewModel = ViewModelProviders.of(getBaseActivity(), new DrugViewModel.Factory(getContext())).get(DrugViewModel.class);
-        drugViewModel.getDrugs().observe(getViewLifecycleOwner(), drugsLiveData -> {
-            this.drugs.clear();
-            this.drugs.addAll(drugsLiveData);
-        });
+        drugs = DataManager.getInstance(getContext()).getDrug();
 
         initData();
     }
@@ -87,7 +99,7 @@ public class BillFragment extends BaseFragment implements DrugInBillDialog.Callb
             drugInBillDialog.show();
         });
         btnCreateBill.setOnClickListener(v -> {
-
+            if (isWriteExternalStorage()) exportPDF();
         });
     }
 
@@ -141,5 +153,87 @@ public class BillFragment extends BaseFragment implements DrugInBillDialog.Callb
 //        Toast.makeText(getContext(),DataManager.getInstance(context).getDrug().size()+"X" , Toast.LENGTH_SHORT).show();
 //        return String.format("D%03d", n);
         return "";
+    }
+
+    private void exportPDF() {
+        int pageHeight = 600;
+        int pageWidth = 300;
+
+        PdfDocument pdfDocument = new PdfDocument();
+        Paint paint = new Paint();
+        Bitmap bmp, scaledBitmap;
+
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.img);
+        scaledBitmap = Bitmap.createScaledBitmap(bmp, 300, 200, false);
+
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(pageWidth, pageHeight, 1).create();
+        PdfDocument.Page page = pdfDocument.startPage(pageInfo);
+
+        Canvas canvas = page.getCanvas();
+
+        canvas.drawBitmap(scaledBitmap, 0, 0, paint);
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextSize(20f);
+        paint.setColor(Color.BLACK);
+        canvas.drawText("HÓA ĐƠN " + "HD0001", 150, 220, paint);
+
+        paint.setTextAlign(Paint.Align.RIGHT);
+        paint.setTextSize(10f);
+        paint.setColor(Color.BLACK);
+        canvas.drawText("Ngày lập: " + "24-07-2000", 280, 250, paint);
+
+        int startY = 260;
+        for (int i=0; i<2; i++) {
+            paint.setTextAlign(Paint.Align.LEFT);
+            paint.setTextSize(14f);
+            paint.setColor(Color.BLACK);
+            canvas.drawText("Thuốc ho " + " x " + " 5 ", 20, startY + 20, paint);
+            paint.setTextAlign(Paint.Align.RIGHT);
+            paint.setTextSize(14f);
+            paint.setColor(Color.BLACK);
+            canvas.drawText(String.valueOf("30" + " VND"), 280, startY + 30, paint);
+            paint.setTextAlign(Paint.Align.LEFT);
+            paint.setTextSize(10f);
+            paint.setColor(Color.BLACK);
+            canvas.drawText("Giá: 15 VND    Đơn vị: Chai", 30, startY + 40, paint);
+            startY += 50;
+        }
+
+        paint.setTextAlign(Paint.Align.RIGHT);
+        paint.setTextSize(15f);
+        paint.setColor(Color.BLACK);
+        canvas.drawText("Tổng cộng: " + "60" + " VND", 280, 580, paint);
+
+        pdfDocument.finishPage(page);
+
+        File file = new File(getBaseActivity().getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "bill.pdf");
+        if (file.exists()) file.delete();
+        try {
+            pdfDocument.writeTo(new FileOutputStream(file));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            pdfDocument.close();
+        }
+    }
+
+    public boolean isWriteExternalStorage() {
+        int hasWriteExternalStorage = ContextCompat.checkSelfPermission(getBaseActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (hasWriteExternalStorage != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getBaseActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 69);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 69) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                exportPDF();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
