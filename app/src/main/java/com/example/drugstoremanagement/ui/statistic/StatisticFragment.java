@@ -1,6 +1,7 @@
 package com.example.drugstoremanagement.ui.statistic;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,12 @@ import com.example.drugstoremanagement.data.db.model.Bill;
 import com.example.drugstoremanagement.data.db.model.DrugStore;
 import com.example.drugstoremanagement.data.viewmodel.DrugStoreViewModel;
 import com.example.drugstoremanagement.ui.base.BaseFragment;
+import com.example.drugstoremanagement.ui.detailbill.DetailBillActivity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class StatisticFragment extends BaseFragment implements View.OnClickListener {
+public class StatisticFragment extends BaseFragment {
 
     private Spinner spinnerDrugStore;
     private ExpandableListView expandableListView;
@@ -56,7 +58,9 @@ public class StatisticFragment extends BaseFragment implements View.OnClickListe
         adapter = new ExpandableListBillAdapter(getContext(), dates, data);
         expandableListView.setAdapter(adapter);
         expandableListView.setOnChildClickListener((expandableListView, v, i, i1, l) -> {
-
+            Intent intent = new Intent(getBaseActivity(), DetailBillActivity.class);
+            intent.putExtra("billId", adapter.getChild(i, i1).getBillID());
+            startActivity(intent);
             return false;
         });
     }
@@ -64,6 +68,7 @@ public class StatisticFragment extends BaseFragment implements View.OnClickListe
     private void setupView(View view) {
         spinnerDrugStore = view.findViewById(R.id.spinner);
         expandableListView = view.findViewById(R.id.list_item);
+        txtTotal = view.findViewById(R.id.txt_total);
     }
 
     private void setupSpinner() {
@@ -90,23 +95,17 @@ public class StatisticFragment extends BaseFragment implements View.OnClickListe
         });
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_search:
-                break;
-            default:
-                break;
-        }
-    }
-
     private void loadData(String drugStoreId) {
         bills.clear();
+        dates.clear();
+        data.clear();
+        long total = 0;
         bills = DataManager.getInstance(getContext()).getBillByDrugStore(drugStoreId);
         Set<String> diffDates = new HashSet<>();
         for (Bill bill : bills) {
+            total += bill.getTotal();
             diffDates.add(bill.getDate());
-            if (data.get(bill.getDate()) != null) {
+            if (data.get(bill.getDate()) == null) {
                 List<Bill> l = new ArrayList<>();
                 l.add(bill);
                 data.put(bill.getDate(), l);
@@ -114,5 +113,7 @@ public class StatisticFragment extends BaseFragment implements View.OnClickListe
                 data.get(bill.getDate()).add(bill);
             }
         }
+        dates.addAll(diffDates);
+        txtTotal.setText(String.valueOf(total));
     }
 }

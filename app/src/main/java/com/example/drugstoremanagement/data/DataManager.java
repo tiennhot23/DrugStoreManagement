@@ -93,4 +93,10 @@ public class DataManager {
         return dbHelper.getBillByDrugStore(drugStoreId);
     }
 
+    public List<Bill> getAllBill() {return dbHelper.getAllBill();}
+
+    public Bill getBill(String billId) {return dbHelper.getBill(billId);}
+
+    public boolean insertBill(Bill bill) {return dbHelper.insertBill(bill) >= 0;}
+
 }

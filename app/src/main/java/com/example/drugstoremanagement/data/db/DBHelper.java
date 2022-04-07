@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import com.example.drugstoremanagement.data.db.model.Drug;
 import androidx.lifecycle.MutableLiveData;
@@ -14,8 +16,10 @@ import com.example.drugstoremanagement.data.db.model.DrugStore;
 import com.example.drugstoremanagement.data.db.model.HistorySearchDrug;
 import com.example.drugstoremanagement.data.db.model.HistorySearchDrugstore;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 public class DBHelper {
 
@@ -106,6 +110,19 @@ public class DBHelper {
         cursor.close();
         return data;
     }
+    public DrugStore getDrugStore(String id) {
+
+        SQLiteDatabase db = appDatabase.getReadableDatabase();
+        DrugStore drugStore = null;
+        String query = "select * from DrugStore WHERE DrugStoreID = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{id});
+        cursor.moveToFirst();
+        if(!cursor.isAfterLast())
+            drugStore = new DrugStore(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+
+        cursor.close();
+        return drugStore;
+    }
 
     public List<DrugStore> findDrugStore(String s) {
         List<DrugStore> data = new ArrayList<>();
@@ -140,7 +157,83 @@ public class DBHelper {
         return db.update("DrugStore", values, "drugStoreId = ?", new String[]{drugStore.getDrugStoreID()});
     }
 
-    /*=============DRUG=====================*/
+    /*=============BILL=====================*/
+    // lay tat ca bill(billId) hien co
+    public List<Bill> getAllBill(){
+        List<Bill> listBill = new ArrayList<>();
+        List<String> listBillID = new ArrayList<>();
+        listBillID = this.getListBillId();
+        for (String id: listBillID) {
+            listBill.add(this.getBill(id));
+        }
+        return listBill;
+    }
+    public List<String> getListBillId(){
+
+        //  Log.d("vị tri",getDatabasePath(DATABASE_NAME).getPath();)
+        List<String> listBillID = new ArrayList<>();
+        String query="Select * from Bill  order by bill.drugStoreId , bill.date";
+        SQLiteDatabase db = appDatabase.getReadableDatabase();
+        Cursor cursor= db.rawQuery(query,null);
+        cursor.moveToFirst();
+        while(cursor.isAfterLast() == false) {
+            listBillID.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        return listBillID;
+    }
+
+    public Bill getBill(String billID){
+        Bill bill = new Bill();
+        DrugStore dr = new DrugStore();
+        String query="SELECT * FROM BILL where BILLID = ?";
+        SQLiteDatabase db = appDatabase.getReadableDatabase();
+        Cursor cursor= db.rawQuery(query,new String[]{billID});
+        cursor.moveToFirst();
+        bill.setBillID(cursor.getString(0));
+        bill.setDrugStore( this.getDrugStore(cursor.getString(1)));
+        bill.setDate(cursor.getString(2));
+        bill.setDrugs(this.getDrugOnBill(cursor.getString(0)));
+        return bill;
+    }
+    public List<Drug> getDrugOnBill(String billID) {
+        List<Drug> data = new ArrayList<>();
+        SQLiteDatabase db = appDatabase.getReadableDatabase();
+        String query = "select dr.drugId, dr.drugName, dr.unit, dt.amount, dr.price  from  Drug dr , detailbill dt where dr.drugId= dt.drugId and dt.billID= ?";
+        Cursor cursor = db.rawQuery(query, new String[]{billID});
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            Drug drug = new Drug(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getInt(3),cursor.getLong(4));
+            data.add(drug);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return data;
+    }
+
+    /* lay chi tiet bill theo billid (billid, date, drugstore, drug, total)*/
+
+    //them bill
+    // lay danh sach bill theo nha thuoc và sap xep theo date giam dan
+
+
+    public long insertBill(Bill bill) {
+        SQLiteDatabase db = appDatabase.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("billId", bill.getBillID());
+        values.put("drugStoreId", bill.getDrugStore().getDrugStoreID());
+        values.put("date", bill.getDate());
+        long result = db.insert("Bill", null, values);
+        for (Drug drug : bill.getDrugs()) {
+            values = new ContentValues();
+            values.put("billId", bill.getBillID());
+            values.put("drugId", drug.getDrugID());
+            values.put("amount", drug.getAmount());
+            db.insert("DetailBill", null, values);
+        }
+        return result;
+    }
+
 
 
     /*=============STATISTIC=====================*/
@@ -162,6 +255,15 @@ public class DBHelper {
             cursor.moveToNext();
         }
         cursor.close();
+//        for (Bill bill : data) {
+//            System.out.println(bill.getBillID());
+//            System.out.println(bill.getDrugStore().getDrugStoreID());
+//            System.out.println(bill.getDate());
+//            for (Drug drug : bill.getDrugs()) {
+//                System.out.println(drug.getDrugName());
+//                System.out.println(drug.getAmount());
+//            }
+//        }
         return data;
     }
 

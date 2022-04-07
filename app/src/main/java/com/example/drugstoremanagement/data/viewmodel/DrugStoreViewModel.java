@@ -31,7 +31,7 @@ public class DrugStoreViewModel extends ViewModel {
     }
 
     public boolean insertDrugstore(DrugStore drugStore) {
-        boolean result = true;
+        boolean result = DataManager.getInstance(context).insertDrugStore(drugStore);;
         if (result) {
             Objects.requireNonNull(drugstores.getValue()).add(drugStore);
             drugstores.postValue(Objects.requireNonNull(drugstores.getValue()));

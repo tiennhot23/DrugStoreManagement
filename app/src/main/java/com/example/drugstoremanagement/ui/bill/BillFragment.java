@@ -2,11 +2,13 @@ package com.example.drugstoremanagement.ui.bill;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.*;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +29,7 @@ import com.example.drugstoremanagement.data.db.model.DrugStore;
 import com.example.drugstoremanagement.data.viewmodel.DrugStoreViewModel;
 import com.example.drugstoremanagement.data.viewmodel.DrugViewModel;
 import com.example.drugstoremanagement.ui.base.BaseFragment;
+import com.example.drugstoremanagement.ui.detailbill.DetailBillActivity;
 import com.example.drugstoremanagement.ui.statistic.DrugStoreNameAdapter;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +58,7 @@ public class BillFragment extends BaseFragment implements DrugInBillDialog.Callb
     private Button btnCreateBill;
     private ImageButton btnAdd;
 
-    private String currentDrugStoreID;
+    private int currentDrugStorePosition;
 
     public BillFragment() {
 
@@ -99,8 +102,30 @@ public class BillFragment extends BaseFragment implements DrugInBillDialog.Callb
             drugInBillDialog.show();
         });
         btnCreateBill.setOnClickListener(v -> {
-            if (isWriteExternalStorage()) exportPDF();
+            createBill();
         });
+    }
+
+    private void createBill() {
+        if (drugsSelected.size() > 0) {
+            Bill bill = new Bill();
+            bill.setBillID(txtBillId.getText().toString().trim());
+            bill.setDate(txtDate.getText().toString().trim());
+            bill.setDrugStore(drugStores.get(currentDrugStorePosition));
+            bill.setDrugs(drugsSelected);
+            if (DataManager.getInstance(getContext()).insertBill(bill)) {
+                showPopupMessage("Tạo hóa đơn thành công", R.raw.success);
+                resetData();
+
+                Handler handler = new Handler();
+                handler.postDelayed(() -> {
+                    Intent intent = new Intent(getBaseActivity(), DetailBillActivity.class);
+                    intent.putExtra("billId", bill.getBillID());
+                    startActivity(intent);
+                }, 2000);
+
+            } else showPopupMessage("Tạo hóa đơn thất bại", R.raw.error);
+        }
     }
 
     private void setupSpinner() {
@@ -111,7 +136,7 @@ public class BillFragment extends BaseFragment implements DrugInBillDialog.Callb
         spinnerDrugStore.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                currentDrugStoreID = drugStoreAdapter.getItemID(i);
+                currentDrugStorePosition = i;
             }
 
             @Override
@@ -137,6 +162,13 @@ public class BillFragment extends BaseFragment implements DrugInBillDialog.Callb
         txtBillId.setText(generateBillId());
     }
 
+    @SuppressLint("SimpleDateFormat")
+    private void resetData() {
+        drugsSelected.clear();
+        if (detailBillAdapter != null) detailBillAdapter.notifyDataSetChanged();
+        initData();
+    }
+
     @Override
     public void onButtonSaveClick() {
         if (detailBillAdapter != null) detailBillAdapter.notifyDataSetChanged();
@@ -149,91 +181,9 @@ public class BillFragment extends BaseFragment implements DrugInBillDialog.Callb
 
     @SuppressLint("DefaultLocale")
     private String generateBillId() {
-//        int n = DataManager.getInstance(getContext()).getbi().size() + 1;
-//        Toast.makeText(getContext(),DataManager.getInstance(context).getDrug().size()+"X" , Toast.LENGTH_SHORT).show();
-//        return String.format("D%03d", n);
-        return "";
+        int n = DataManager.getInstance(getContext()).getAllBill().size() + 1;
+        return String.format("HD%03d", n);
     }
 
-    private void exportPDF() {
-        int pageHeight = 600;
-        int pageWidth = 300;
 
-        PdfDocument pdfDocument = new PdfDocument();
-        Paint paint = new Paint();
-        Bitmap bmp, scaledBitmap;
-
-        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.img);
-        scaledBitmap = Bitmap.createScaledBitmap(bmp, 300, 200, false);
-
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(pageWidth, pageHeight, 1).create();
-        PdfDocument.Page page = pdfDocument.startPage(pageInfo);
-
-        Canvas canvas = page.getCanvas();
-
-        canvas.drawBitmap(scaledBitmap, 0, 0, paint);
-        paint.setTextAlign(Paint.Align.CENTER);
-        paint.setTextSize(20f);
-        paint.setColor(Color.BLACK);
-        canvas.drawText("HÓA ĐƠN " + "HD0001", 150, 220, paint);
-
-        paint.setTextAlign(Paint.Align.RIGHT);
-        paint.setTextSize(10f);
-        paint.setColor(Color.BLACK);
-        canvas.drawText("Ngày lập: " + "24-07-2000", 280, 250, paint);
-
-        int startY = 260;
-        for (int i=0; i<2; i++) {
-            paint.setTextAlign(Paint.Align.LEFT);
-            paint.setTextSize(14f);
-            paint.setColor(Color.BLACK);
-            canvas.drawText("Thuốc ho " + " x " + " 5 ", 20, startY + 20, paint);
-            paint.setTextAlign(Paint.Align.RIGHT);
-            paint.setTextSize(14f);
-            paint.setColor(Color.BLACK);
-            canvas.drawText(String.valueOf("30" + " VND"), 280, startY + 30, paint);
-            paint.setTextAlign(Paint.Align.LEFT);
-            paint.setTextSize(10f);
-            paint.setColor(Color.BLACK);
-            canvas.drawText("Giá: 15 VND    Đơn vị: Chai", 30, startY + 40, paint);
-            startY += 50;
-        }
-
-        paint.setTextAlign(Paint.Align.RIGHT);
-        paint.setTextSize(15f);
-        paint.setColor(Color.BLACK);
-        canvas.drawText("Tổng cộng: " + "60" + " VND", 280, 580, paint);
-
-        pdfDocument.finishPage(page);
-
-        File file = new File(getBaseActivity().getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "bill.pdf");
-        if (file.exists()) file.delete();
-        try {
-            pdfDocument.writeTo(new FileOutputStream(file));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            pdfDocument.close();
-        }
-    }
-
-    public boolean isWriteExternalStorage() {
-        int hasWriteExternalStorage = ContextCompat.checkSelfPermission(getBaseActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (hasWriteExternalStorage != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getBaseActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 69);
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 69) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                exportPDF();
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
 }

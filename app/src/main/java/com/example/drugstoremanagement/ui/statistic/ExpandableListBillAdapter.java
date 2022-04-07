@@ -76,7 +76,7 @@ public class ExpandableListBillAdapter extends BaseExpandableListAdapter {
         TextView txtBillId = view.findViewById(R.id.txt_bill_id);
         txtBillId.setText(data.get(dates.get(i)).get(i1).getBillID());
         TextView txtMoney = view.findViewById(R.id.txt_money);
-        txtMoney.setText(data.get(dates.get(i)).get(i1).getDate());
+        txtMoney.setText(String.valueOf(data.get(dates.get(i)).get(i1).getTotal()));
         return view;
     }
 

@@ -47,11 +47,11 @@ public class Bill {
         this.date = date;
     }
 
-    public DrugStore getDrugStoreID() {
+    public DrugStore getDrugStore() {
         return drugStore;
     }
 
-    public void setDrugStoreID(DrugStore drugStore) {
+    public void setDrugStore(DrugStore drugStore) {
         this.drugStore = drugStore;
     }
 
@@ -69,5 +69,13 @@ public class Bill {
 
     public void setTotal(long total) {
         this.total = total;
+    }
+
+    public long calTotal() {
+        long total = 0;
+        for (Drug drug : drugs) {
+            total += drug.getAmount() * drug.getPrice();
+        }
+        return total;
     }
 }
