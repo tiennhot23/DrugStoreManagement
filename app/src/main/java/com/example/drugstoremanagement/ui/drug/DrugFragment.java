@@ -25,7 +25,6 @@ import com.example.drugstoremanagement.data.viewmodel.HistorySearchDrugViewModel
 import com.example.drugstoremanagement.data.viewmodel.HistorySearchDrugstoreViewModel;
 import com.example.drugstoremanagement.ui.base.BaseFragment;
 import com.nex3z.flowlayout.FlowLayout;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +45,7 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
     }
 
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drug, container, false);
         return view;
     }
