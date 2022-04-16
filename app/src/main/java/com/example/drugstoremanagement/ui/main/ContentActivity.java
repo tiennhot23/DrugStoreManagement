@@ -1,8 +1,10 @@
 package com.example.drugstoremanagement.ui.main;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -16,7 +18,7 @@ import com.example.drugstoremanagement.ui.drugstore.DrugStoreFragment;
 import com.example.drugstoremanagement.ui.statistic.StatisticFragment;
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
-import org.jetbrains.annotations.NotNull;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +72,7 @@ public class ContentActivity extends BaseActivity implements NavigationView.OnNa
 
     @SuppressLint("NonConstantResourceId")
     @Override
-    public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.drug_page:
                 if (currentFragment != CurrentFragment.DRUG) {
@@ -113,5 +115,19 @@ public class ContentActivity extends BaseActivity implements NavigationView.OnNa
         fragmentTransaction.replace(R.id.content_frame, fragments[currentFragment.position]);
         fragmentTransaction.commit();
         toolbar.setTitle(currentFragment.labelID);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = new Intent(ContentActivity.this,MainActivity.class);
+        startActivity(intent);
+
+        return super.onOptionsItemSelected(item);
     }
 }
