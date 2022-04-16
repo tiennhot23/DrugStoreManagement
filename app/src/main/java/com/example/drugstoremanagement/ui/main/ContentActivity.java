@@ -127,7 +127,7 @@ public class ContentActivity extends BaseActivity implements NavigationView.OnNa
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent intent = new Intent(ContentActivity.this,MainActivity.class);
         startActivity(intent);
-
+        finish();
         return super.onOptionsItemSelected(item);
     }
 }
