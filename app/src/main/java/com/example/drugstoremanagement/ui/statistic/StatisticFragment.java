@@ -72,7 +72,7 @@ public class StatisticFragment extends BaseFragment {
     }
 
     private void setupSpinner() {
-        drugStoreAdapter = new DrugStoreNameAdapter(getContext(), R.layout.spinner_item, drugStores);
+        drugStoreAdapter = new DrugStoreNameAdapter(getContext(), R.layout.spinner_item, R.id.txt_drugstore_name, drugStores);
         drugStoreAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinnerDrugStore.setAdapter(drugStoreAdapter);
         spinnerDrugStore.setDropDownVerticalOffset(160);

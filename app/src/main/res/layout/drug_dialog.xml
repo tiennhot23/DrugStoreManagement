@@ -127,15 +127,14 @@
                     android:layout_alignStart="@id/edt_price"
                     android:spinnerMode="dialog"/>
             </RelativeLayout>
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="30dp"
                 android:text="@string/save"
-                style="@style/MyButton"
-                android:background="@drawable/button_background" />
+                style="@style/MyButton"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -20,8 +20,8 @@ public class DrugStoreNameAdapter extends ArrayAdapter<String> {
     private int resource;
     private List<DrugStore> drugStores;
 
-    public DrugStoreNameAdapter(@NonNull Context context, int resource, List<DrugStore> drugStores) {
-        super(context, resource);
+    public DrugStoreNameAdapter(@NonNull Context context, int resource, int textViewResourceId, List<DrugStore> drugStores) {
+        super(context, resource, textViewResourceId);
         this.context = context;
         this.drugStores = drugStores;
         this.resource = resource;

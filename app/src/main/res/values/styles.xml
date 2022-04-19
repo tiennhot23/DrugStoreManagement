@@ -15,7 +15,7 @@
     <style name="MyButton" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@color/light_text</item>
         <item name="android:textSize">@dimen/text_normal</item>
-        <item name="android:background">@drawable/button_background</item>
+        <item name="android:background">@drawable/button_appearance</item>
         <item name="android:textStyle">bold</item>
     </style>
 
