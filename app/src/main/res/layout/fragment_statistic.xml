@@ -31,13 +31,41 @@
                 android:layout_marginHorizontal="15dp"
                 android:src="@drawable/ic_arrow_down" />
         </RelativeLayout>
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/layout_add"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/dark_primary"
-            android:gravity="center_vertical"
-            android:layout_marginHorizontal="40dp"
-            android:layout_gravity="center_vertical"/>
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/btn_switch"
+                android:layout_alignBottom="@id/btn_switch"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@id/btn_switch">
+
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/dark_primary"
+                android:gravity="center_vertical"
+                android:layout_marginHorizontal="40dp"
+                android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/btn_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:thumb="@drawable/switch_thumb_background"
+                android:track="@drawable/switch_track_background"/>
+        </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -50,6 +78,15 @@
                 android:layout_marginVertical="15dp"
                 android:groupIndicator="@drawable/expandlist_indicator"
                 android:overScrollMode="never" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/line"
+                android:visibility="gone"
+                android:layout_marginVertical="15dp"/>
+
             <LinearLayout
                 android:id="@+id/line"
                 android:layout_width="match_parent"
