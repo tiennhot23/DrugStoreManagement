@@ -24,7 +24,6 @@ import com.example.drugstoremanagement.data.db.model.DrugStore;
 import com.example.drugstoremanagement.data.db.model.HistorySearchDrug;
 import com.example.drugstoremanagement.data.db.model.HistorySearchDrugstore;
 import com.example.drugstoremanagement.data.viewmodel.DrugStoreViewModel;
-import com.example.drugstoremanagement.data.viewmodel.HistorySearchDrugstoreViewModel;
 import com.example.drugstoremanagement.ui.base.BaseFragment;
 import com.nex3z.flowlayout.FlowLayout;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +42,6 @@ public class DrugStoreFragment extends BaseFragment implements View.OnClickListe
     private List<DrugStore> drugStores = new ArrayList<>();
 
     private DrugStoreViewModel drugStoreViewModel;
-    private HistorySearchDrugstoreViewModel historySearchDrugstoreViewModel;
 
     public DrugStoreFragment() {
 
@@ -62,6 +60,9 @@ public class DrugStoreFragment extends BaseFragment implements View.OnClickListe
         drugStoreViewModel.getDrugstores().observe(getViewLifecycleOwner(), this::setDrugStores);
         btnAdd.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
+
+
+
         LayoutAnimationController layoutAnimationController = AnimationUtils.loadLayoutAnimation(getContext(),R.anim.layout_animation_left_to_right);
         recycler.setLayoutAnimation(layoutAnimationController);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -72,31 +73,26 @@ public class DrugStoreFragment extends BaseFragment implements View.OnClickListe
     }
 
     private void loadHistorySearch() {
-        historySearchDrugstoreViewModel = ViewModelProviders.of(getBaseActivity(), new HistorySearchDrugstoreViewModel.Factory(getContext())).get(HistorySearchDrugstoreViewModel.class);
-        historySearchDrugstoreViewModel.getHistorySearchDrugstores().observe(getViewLifecycleOwner(), historySearches -> {
-            if(historySearches.size() > 10){
-                historySearchDrugstoreViewModel.deleteHistorySearchDrugstore(historySearches.get(0));
-            }
-            historySearchLayout.removeAllViews();
-            for(int i=0; i<historySearches.size(); i++) {
-                TextView textView = new TextView(getContext());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.setMargins(10,10,10,10);
-                textView.setId(i);
-                textView.setLayoutParams(params);
-                textView.setBackground(getResources().getDrawable(R.drawable.search_item));
-                textView.getBackground().setAlpha(200);
-                textView.setPadding(20,10,20,10);
-                textView.setText(historySearches.get(i).getSearch());
-                textView.setTextColor(Color.WHITE);
-                historySearchLayout.addView(textView, 0);
+        List<HistorySearchDrugstore> historySearchDrugstores = DataManager.getInstance(getBaseActivity()).getHistorySearchDrugstore();
+        historySearchLayout.removeAllViews();
+        for(int i=0; i<historySearchDrugstores.size(); i++) {
+            TextView textView = new TextView(getContext());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(10,10,10,10);
+            textView.setId(i);
+            textView.setLayoutParams(params);
+            textView.setBackground(getResources().getDrawable(R.drawable.search_item));
+            textView.getBackground().setAlpha(200);
+            textView.setPadding(20,10,20,10);
+            textView.setText(historySearchDrugstores.get(i).getSearch());
+            textView.setTextColor(Color.WHITE);
+            historySearchLayout.addView(textView, 0);
 
-                textView.setOnClickListener(v -> {
-                    edtSearch.setText(textView.getText());
-                    search(textView.getText().toString());
-                });
-            }
-        });
+            textView.setOnClickListener(v -> {
+                edtSearch.setText(textView.getText());
+                search(textView.getText().toString());
+            });
+        }
     }
 
     private void setupView(View view) {
@@ -125,8 +121,27 @@ public class DrugStoreFragment extends BaseFragment implements View.OnClickListe
                 break;
             case R.id.btn_search:
                 String title = edtSearch.getText().toString().trim();
-                if(!title.equals(""))
-                    historySearchDrugstoreViewModel.insertHistorySearchDrugstore(new HistorySearchDrugstore(title));
+                if(!title.equals("")) {
+                    HistorySearchDrugstore historySearchDrugstore = new HistorySearchDrugstore(title);
+                    boolean result = DataManager.getInstance(getBaseActivity()).insertHistorySearchDrugstore(historySearchDrugstore);
+                    if (result) {
+                        TextView textView = new TextView(getContext());
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        params.setMargins(10,10,10,10);
+                        textView.setLayoutParams(params);
+                        textView.setBackground(getResources().getDrawable(R.drawable.search_item));
+                        textView.getBackground().setAlpha(200);
+                        textView.setPadding(20,10,20,10);
+                        textView.setText(historySearchDrugstore.getSearch());
+                        textView.setTextColor(Color.WHITE);
+                        historySearchLayout.addView(textView, 0);
+
+                        textView.setOnClickListener(v -> {
+                            edtSearch.setText(textView.getText());
+                            search(textView.getText().toString());
+                        });
+                    }
+                }
                 search(edtSearch.getText().toString().trim());
                 break;
             default:

@@ -3,6 +3,7 @@ package com.example.drugstoremanagement.ui.drug;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +39,6 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
     private List<Drug> listDrug = new ArrayList<>();
     private DrugDialog drugDialog;
 
-    private HistorySearchDrugViewModel historySearchDrugViewModel;
-
     public DrugFragment() {
 
     }
@@ -67,31 +66,26 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
     }
 
     private void loadHistorySearch() {
-        historySearchDrugViewModel = ViewModelProviders.of(getBaseActivity(), new HistorySearchDrugViewModel.Factory(getContext())).get(HistorySearchDrugViewModel.class);
-        historySearchDrugViewModel.getHistorySearchDrugs().observe(this, historySearches -> {
-            if(historySearches.size() > 10){
-                historySearchDrugViewModel.deleteHistorySearchDrug(historySearches.get(0));
-            }
-            historySearchLayout.removeAllViews();
-            for(int i=0; i<historySearches.size(); i++) {
-                TextView textView = new TextView(getContext());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.setMargins(10,10,10,10);
-                textView.setId(i);
-                textView.setLayoutParams(params);
-                textView.setBackground(getResources().getDrawable(R.drawable.search_item));
-                textView.getBackground().setAlpha(200);
-                textView.setPadding(20,10,20,10);
-                textView.setText(historySearches.get(i).getSearch());
-                textView.setTextColor(Color.WHITE);
-                historySearchLayout.addView(textView, 0);
+        List<HistorySearchDrug> historySearchDrugs = DataManager.getInstance(getBaseActivity()).getHistorySearchDrug();
+        historySearchLayout.removeAllViews();
+        for(int i=0; i<historySearchDrugs.size(); i++) {
+            TextView textView = new TextView(getContext());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(10,10,10,10);
+            textView.setId(i);
+            textView.setLayoutParams(params);
+            textView.setBackground(getResources().getDrawable(R.drawable.search_item));
+            textView.getBackground().setAlpha(200);
+            textView.setPadding(20,10,20,10);
+            textView.setText(historySearchDrugs.get(i).getSearch());
+            textView.setTextColor(Color.WHITE);
+            historySearchLayout.addView(textView, 0);
 
-                textView.setOnClickListener(v -> {
-                    txtSearch.setText(textView.getText());
-                    searchDrug(textView.getText().toString());
-                });
-            }
-        });
+            textView.setOnClickListener(v -> {
+                txtSearch.setText(textView.getText());
+                searchDrug(textView.getText().toString());
+            });
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -102,9 +96,6 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
         recyclerViewDrug.setLayoutAnimation(layoutAnimationController);
         if (recyclerViewDrug.getAdapter() != null) recyclerViewDrug.getAdapter().notifyDataSetChanged();
     }
-//    public void setAnimation(int animation){
-//
-//    }
 
     public void setControl(View view){
         txtSearch = view.findViewById(R.id.edt_search);
@@ -123,8 +114,27 @@ public class DrugFragment extends BaseFragment implements View.OnClickListener,D
                 break;
             case R.id.btn_search:
                 String title = txtSearch.getText().toString().trim();
-                if(!title.equals(""))
-                    historySearchDrugViewModel.insertHistorySearchDrug(new HistorySearchDrug(title));
+                if(!title.equals("")) {
+                    HistorySearchDrug historySearchDrug = new HistorySearchDrug(title);
+                    boolean result = DataManager.getInstance(getBaseActivity()).insertHistorySearchDrug(historySearchDrug);
+                    if (result) {
+                        TextView textView = new TextView(getContext());
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        params.setMargins(10,10,10,10);
+                        textView.setLayoutParams(params);
+                        textView.setBackground(getResources().getDrawable(R.drawable.search_item));
+                        textView.getBackground().setAlpha(200);
+                        textView.setPadding(20,10,20,10);
+                        textView.setText(historySearchDrug.getSearch());
+                        textView.setTextColor(Color.WHITE);
+                        historySearchLayout.addView(textView, 0);
+
+                        textView.setOnClickListener(v -> {
+                            txtSearch.setText(textView.getText());
+                            searchDrug(textView.getText().toString());
+                        });
+                    }
+                }
                 searchDrug(txtSearch.getText().toString().trim());
                 break;
             default:
