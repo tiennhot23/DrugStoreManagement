@@ -63,7 +63,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:thumb="@drawable/switch_thumb_background"
-                android:track="@drawable/switch_track_background"/>
+                android:track="@drawable/switch_track_background" />
         </RelativeLayout>
 
         <RelativeLayout

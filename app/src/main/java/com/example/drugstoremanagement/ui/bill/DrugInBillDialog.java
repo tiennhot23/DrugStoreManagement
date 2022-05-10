@@ -82,7 +82,6 @@ public class DrugInBillDialog extends BaseDialog {
         getWindow().setBackgroundDrawableResource(R.color.transparent);
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         getWindow().getAttributes().windowAnimations = R.style.ZoomAnimation;
-        setCancelable(false);
         setCanceledOnTouchOutside(false);
     }
 }

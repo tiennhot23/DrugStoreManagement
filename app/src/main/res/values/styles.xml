@@ -5,7 +5,6 @@
         <item name="backgroundTint">@color/light_card</item>
         <item name="android:maxLines">1</item>
         <item name="android:inputType">text</item>
-        <item name="android:ellipsize">end</item>
         <item name="android:textColor">@color/dark_text</item>
         <item name="android:textCursorDrawable">@drawable/cursor_edittext</item>
         <item name="android:padding">10dp</item>
@@ -17,6 +16,15 @@
         <item name="android:textSize">@dimen/text_normal</item>
         <item name="android:background">@drawable/button_appearance</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MySpinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:padding">10dp</item>
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="android:background">@null</item>
+        <item name="android:popupElevation">1dp</item>
+        <item name="android:popupAnimationStyle">@style/ZoomAnimation</item>
+        <item name="android:textSize">@dimen/text_normal</item>
     </style>
 
     <style name="SmallImageButton" parent="Widget.AppCompat.ImageButton">
@@ -55,14 +63,7 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="MySpinner" parent="Widget.AppCompat.Spinner">
-        <item name="android:padding">10dp</item>
-        <item name="android:spinnerMode">dropdown</item>
-        <item name="android:background">@null</item>
-        <item name="android:popupElevation">1dp</item>
-        <item name="android:popupAnimationStyle">@style/ZoomAnimation</item>
-        <item name="android:textSize">@dimen/text_normal</item>
-    </style>
+
     
     <style name="MySearchBox" parent="CardView">
         <item name="cardBackgroundColor">@color/light_card</item>

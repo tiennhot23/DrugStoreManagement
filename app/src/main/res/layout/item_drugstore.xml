@@ -36,18 +36,18 @@
                 android:paddingHorizontal="20dp">
 
                 <TextView
+                    style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/address_"
-                    style="@style/SmallText"/>
+                    android:text="@string/address_" />
 
                 <TextView
                     android:id="@+id/txt_address"
+                    style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:text="80 Man Thiện"
-                    style="@style/SmallText"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
         </LinearLayout>
